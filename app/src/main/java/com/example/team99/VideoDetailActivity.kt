@@ -17,7 +17,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
     }
     private fun back() = with(binding) {
-        vidieoBack.setOnClickListener {
+        playerView.setOnClickListener {
             finish()
         }
     }
