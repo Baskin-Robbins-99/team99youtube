@@ -2,4 +2,9 @@
     <string name="app_name">team99</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <style name="CustomChipChoice." parent="@style/Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor" >@color/chip_bg_state_list</item>
+        <item name="android:textColor" >@color/chip_text_state_list</item>
+
+    </style>
 </resources>
