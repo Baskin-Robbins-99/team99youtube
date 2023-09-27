@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.team99.MyVideoFragment.View.MyVideoFragment
 import com.example.team99.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.item_my_video -> replaceFragment(MyVideoFragment())
                     R.id.item_search ->replaceFragment(SearchFragment())
                 }
-                true
             }
             selectedItemId = R.id.home_frag
         }
