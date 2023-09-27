@@ -13,7 +13,7 @@ interface Retrofit_interface {
         @Query("Chart") chart: String?,
         @Query("regionCode") regionCode: String?,
         @Query("key") key: String?
-    ): Call<YoutubeVideosApi?>?
+    ): Call<YoutubeVideosApi>
     @GET("youtube/v3/videoCategories")
     fun categoryVideo(
 
