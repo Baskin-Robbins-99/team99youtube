@@ -1,9 +1,9 @@
-package com.example.team99
+package com.example.team99.DTO
 
 
 import com.google.gson.annotations.SerializedName
 
-data class YoutubeAPI(
+data class YoutubeVideosApi(
     @SerializedName("etag")
     val etag: String?,
     @SerializedName("items")
@@ -15,7 +15,6 @@ data class YoutubeAPI(
     @SerializedName("pageInfo")
     val pageInfo: PageInfo?
 ) {
-
     data class PageInfo(
         @SerializedName("resultsPerPage")
         val resultsPerPage: Int?,
@@ -126,5 +125,3 @@ data class YoutubeAPI(
         }
     }
 }
-
-
