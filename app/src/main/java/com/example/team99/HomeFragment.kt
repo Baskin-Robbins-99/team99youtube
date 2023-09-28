@@ -1,7 +1,9 @@
 package com.example.team99
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +19,13 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
-    private lateinit var adapter:VideoAdpter
+    private lateinit var adapter: VideoAdpter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,48 +45,45 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun getVideoData () {
-        RetrofitClient.apiService().popularVideo("snippet","mostPopular","KR","AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc" ).enqueue(object: Callback<YoutubeVideosApi> {
-            override fun onResponse(call: Call<YoutubeVideosApi>, response: Response<YoutubeVideosApi>){
-                if (response.isSuccessful) {
-                    val videosApi = response.body()
-                    if (videosApi != null) {
-                        val items = videosApi.items
-                        if (items != null) {
-                            for (item in items) {
-                                val snippet = item?.snippet
-                                if (snippet != null) {
-                                    val thumbnails = snippet.thumbnails?.default?.url ?: ""
-                                    val title = snippet.title ?: ""
-                                    val videoItem = VideoItem(thumbnails, title)
-                                    adapter.videoItems.add(videoItem)
+    private fun getVideoData() {
+        RetrofitClient.apiService()
+            .popularVideo("snippet", "mostPopular", "KR", "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .enqueue(object : Callback<YoutubeVideosApi> {
+                override fun onResponse(
+                    call: Call<YoutubeVideosApi>,
+                    response: Response<YoutubeVideosApi>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("respone", response.body().toString())
+                        val videosApi = response.body()
+                        if (videosApi != null) {
+                            val items = videosApi.items
+                            if (items != null) {
+                                for (item in items) {
+                                    val snippet = item?.snippet
+                                    if (snippet != null) {
+                                        val thumbnails = snippet.thumbnails?.default?.url ?: ""
+                                        val title = snippet.title ?: ""
+                                        val videoItem = VideoItem(thumbnails, title)
+                                        adapter.videoItems.add(videoItem)
+                                    }
                                 }
+                                adapter.notifyDataSetChanged()
                             }
-                            adapter.notifyDataSetChanged()
+                        } else {
+
+
+                        }
                     }
-            }  else {
+                }
 
+                override fun onFailure(call: Call<YoutubeVideosApi>, t: Throwable) {
 
-                    }}
-                }override fun onFailure(call: Call<YoutubeVideosApi>, t: Throwable) {
-
-            }
-        })}}
-
-
-
+                }
+            })
+    }
+}
 
 
 
-
-
-
-//selectVideo()
-
-//    private fun selectVideo() = with(binding) {
-//        homeImgThumbnail.setOnClickListener {
-//            val intent = Intent(context, VideoDetailActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
 

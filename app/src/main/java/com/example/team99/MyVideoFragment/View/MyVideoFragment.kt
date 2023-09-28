@@ -21,9 +21,13 @@ import com.example.team99.databinding.FragmentMyVideoBinding
 class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding
     lateinit var mystorageadapter: MyStorageAdapter
-    var data: MyStorageAdapter = MyStorageAdapter(requireContext())
     lateinit var helper: RoomOpenHelper
     lateinit var storageDao: StorageDAO
+    private lateinit var myvideos : Context
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        myvideos = requireContext()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,22 +39,12 @@ class MyVideoFragment : Fragment() {
         return binding.root
     }
 
-    //    private fun room(){
-//        storageDao = StorageDatabase.getDatabase(this).getMyDAo()
-//        val myVideo = storageDao.getAll()
-//
-//        myVideo.observe(this){
-//            val str = StringBuilder().apply {
-//                for (i)
-//            }
-//        }
-//    }
-    private fun saveStorage() = with(binding){
-            mystorageadapter = MyStorageAdapter(requireContext())
-            myvdRcStorage.adapter = mystorageadapter
-        
+
+    private fun saveStorage()  {
+        mystorageadapter = MyStorageAdapter(myvideos)
+            binding.myvdRcStorage.adapter = mystorageadapter
     }
-    }
+}
 
 
 

@@ -1,6 +1,7 @@
 package com.example.team99
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -31,6 +32,17 @@ class VideoAdpter (private val mContext: Context) : RecyclerView.Adapter<VideoAd
     inner class PopularHolder(val binding: VideoItemBinding) : RecyclerView.ViewHolder(binding.root){
         var thumbnails: ImageView = binding.thumbnails
         var title: TextView = binding.title
+        init{
+            thumbnails.setOnClickListener {
+                val position =adapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val clickItem = videoItems[position]
+                    val intent = Intent(thumbnails.context,VideoDetailActivity::class.java)
+                  intent.putExtra("key", videoItems)
+                    thumbnails.context.startActivity(intent)
+                }
+            }
+        }
 
     }
 

@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -37,6 +38,7 @@ android {
     buildFeatures{
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -66,7 +68,6 @@ dependencies {
     //Retrofit
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
-
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
-
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 }

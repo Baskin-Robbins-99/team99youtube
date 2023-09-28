@@ -42,8 +42,6 @@ class MyStorageAdapter(private val myvideos : Context) :
             val video_thumnail = binding.myvdVideoThumbnail
             val title = binding.myvdVideoTitle
             val channel = binding.myvdVideoId
-
         }
-
     }
 
