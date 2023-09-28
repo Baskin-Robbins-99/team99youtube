@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -36,6 +38,7 @@ android {
     buildFeatures{
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -54,4 +57,24 @@ dependencies {
     //cardview
     implementation ("androidx.recyclerview:recyclerview:1.0.0")
     implementation ("androidx.cardview:cardview:1.0.0")
+    //glide
+    implementation ("com.github.bumptech.glide:glide:4.11.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
+    // Room components
+    implementation ("androidx.room:room-runtime:2.5.2")
+    annotationProcessor ("androidx.room:room-compiler:2.5.2")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation ("androidx.room:room-ktx:2.5.2")
+    // optional - Test helpers
+    testImplementation ("androidx.room:room-testing:2.5.2")
+    // Kotlinx Serilaization
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    //Retrofit
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    //Okhttp
 }

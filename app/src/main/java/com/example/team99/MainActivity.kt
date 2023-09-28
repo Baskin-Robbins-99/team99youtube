@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.team99.MyVideoFragment.View.MyVideoFragment
 import com.example.team99.Home.HomeFragment
 import com.example.team99.databinding.ActivityMainBinding
 
