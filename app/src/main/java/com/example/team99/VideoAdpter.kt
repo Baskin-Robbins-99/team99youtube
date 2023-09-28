@@ -1,5 +1,6 @@
 package com.example.team99
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import com.example.team99.databinding.VideoItemBinding
 
 class VideoAdpter (private val mContext: Context) : RecyclerView.Adapter<VideoAdpter.PopularHolder>() {
 
-    var videoItems: ArrayList<VideoItem> = ArrayList()
+    private var videoItems: ArrayList<VideoItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoAdpter.PopularHolder {
         val binding = VideoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -43,6 +44,11 @@ class VideoAdpter (private val mContext: Context) : RecyclerView.Adapter<VideoAd
                 }
             }
         }
+
+    }
+
+    @SuppressLint("NotifiDataSetChanged")
+    internal fun setData(newItems: VideoItem){
 
     }
 

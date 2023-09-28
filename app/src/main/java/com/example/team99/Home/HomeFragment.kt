@@ -11,11 +11,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.team99.Home.ViewModel.HomeViewModel
-import com.example.team99.MyVideoFragment
-import com.example.team99.VideoDetailActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.DTO.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.VideoAdpter
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,14 +24,14 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
     private lateinit var adapter: VideoAdpter
+    lateinit var homeViewModel: HomeViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
 
-    private  lateinit var binding: FragmentHomeBinding
-    lateinit var homeViewModel: HomeViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
