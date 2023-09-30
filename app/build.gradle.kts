@@ -17,6 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -78,4 +79,6 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
     //Okhttp
+    implementation ("androidx.fragment:fragment-ktx:1.4.0")
+
 }

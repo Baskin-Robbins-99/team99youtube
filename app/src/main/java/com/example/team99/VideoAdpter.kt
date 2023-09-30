@@ -1,6 +1,5 @@
 package com.example.team99
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.team99.DTO.YoutubeCategoriesApi
 import com.example.team99.databinding.VideoItemBinding
 
 class VideoAdpter(private val mContext: Context) :
@@ -57,7 +55,11 @@ class VideoAdpter(private val mContext: Context) :
 
             VIEW_TYPE_CATEGORY -> {
                 val categoryHolder = holder as CategoryHolder
-                // 카테고리 아이템 바인딩 코드 작성
+                val videoItem = videoItems[position]
+                Glide.with(mContext)
+                    .load(videoItem.thumbnails)
+                    .into(categoryHolder.thumbnails)
+                categoryHolder.title.text = videoItem.title
             }
 
             VIEW_TYPE_CHANNEL -> {
@@ -99,19 +101,34 @@ class VideoAdpter(private val mContext: Context) :
         }
     }
 
-    inner class CategoryHolder(private val binding: VideoItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        // 카테고리 아이템 바인딩 코드 작성
+    inner class CategoryHolder(private val binding: VideoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        var thumbnails: ImageView = binding.thumbnails
+        var title: TextView = binding.title
+
+        init {
+            thumbnails.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val clickItem = videoItems[position]
+                    val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
+                    intent.putExtra("key", videoItems)
+                    thumbnails.context.startActivity(intent)
+                }
+            }
+        }
     }
 
-    inner class ChannelHolder(private val binding: VideoItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ChannelHolder(private val binding: VideoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         // 채널 아이템 바인딩 코드 작성
     }
-}
-    @SuppressLint("NotifiDataSetChanged")
-    internal fun setData(newItems: VideoItem) {
-
+    fun setVideos(newVideos: List<VideoItem?>?) {
+        videoItems.clear()
+        if (newVideos != null) {
+            videoItems.addAll(newVideos.filterNotNull())
+        }
+        notifyDataSetChanged()
     }
-fun setVideos () {
-
 }
 

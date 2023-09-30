@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
 
-    private fun getRetrofit():Retrofit{
+    private fun getRetrofit(): Retrofit {
         val token: String = ""
 
         val gson = GsonBuilder().setLenient().create()
@@ -24,7 +24,7 @@ object RetrofitClient {
             //Request
             val request = it.request()
                 .newBuilder()
-                .addHeader("Authorization","Bearer $token")
+                .addHeader("Authorization", "Bearer $token")
                 .build()
 
             //Response
@@ -39,26 +39,7 @@ object RetrofitClient {
             .build()
     }
 
-
-//        fun apiService(): Retrofit_interface{
-//            return getRetrofit().create(Retrofit_interface::class.java)
-//        }
-    val apiService : Retrofit_interface by lazy {
-    getRetrofit().create(Retrofit_interface::class.java)
-}
-//    private fun createOkHttpClient(): OkHttpClient {
-//        val interceptor = HttpLoggingInterceptor()
-//
-//        if (BuildConfig.DEBUG)
-//            interceptor.level = HttpLoggingInterceptor.Level.BODY
-//        else
-//            interceptor.level = HttpLoggingInterceptor.Level.NONE
-//
-//        return OkHttpClient.Builder()
-//            .connectTimeout(20, TimeUnit.SECONDS)
-//            .readTimeout(20, TimeUnit.SECONDS)
-//            .writeTimeout(20, TimeUnit.SECONDS)
-//            .addNetworkInterceptor(interceptor)
-//            .build()
-//    }
+    val apiService: Retrofit_interface by lazy {
+        getRetrofit().create(Retrofit_interface::class.java)
+    }
 }
