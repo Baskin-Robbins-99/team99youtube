@@ -24,7 +24,7 @@
         android:layout_height="0dp"
         app:resize_mode="fill"
         app:show_subtitle_button="true"
-        tools:fastforward_increment="15000"
+        tools:fastforward_increment="16000"
         tools:resize_mode="fixed_width"
         tools:rewind_increment="15000"
         tools:show_buffering="when_playing"
