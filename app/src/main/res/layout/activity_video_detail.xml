@@ -1,77 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/brown"
     android:fitsSystemWindows="true"
-    app:layoutDescription="@xml/activity_video_detail_scene"
+    android:background="@color/brown"
     tools:context=".VideoDetailActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainContainerLayout"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:background="@color/brown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/playerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:resize_mode="fill"
-        app:show_subtitle_button="true"
-        tools:fastforward_increment="16000"
-        tools:resize_mode="fixed_width"
-        tools:rewind_increment="15000"
-        tools:show_buffering="when_playing"
-        tools:show_fastforward_button="true"
-        tools:show_next_button="false"
-        tools:show_previous_button="false"
-        tools:show_rewind_button="true"
-        tools:show_subtitle_button="true"
-        tools:use_artwork="true"
-        tools:use_controller="true"
-        tools:use_sensor_rotation="true"
-        app:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
-        app:layout_constraintStart_toStartOf="@id/mainContainerLayout"
-        app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
-
-    <ImageView
-        android:id="@+id/bottomPlayerControlButton"
+    <TextView
+        android:id="@+id/vidieo_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
-        app:layout_constraintEnd_toEndOf="@id/mainContainerLayout"
-        app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
+        android:text=" 디테일 페이지입니다."
+        android:layout_marginStart="150dp"/>
 
-    <TextView
-        android:id="@+id/bottomTitleTextView"
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/vidieo_back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="12dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/bottomPlayerControlButton"
-        app:layout_constraintEnd_toStartOf="@id/bottomPlayerControlButton"
-        app:layout_constraintStart_toEndOf="@id/playerView"
-        app:layout_constraintTop_toTopOf="@id/bottomPlayerControlButton" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/brown"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainContainerLayout" />
+        app:srcCompat="@drawable/icon_back" />
 
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
