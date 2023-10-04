@@ -31,7 +31,9 @@
             android:layout_width="0dp"
             android:layout_height="250dp"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="64dp" />
 
         <Constraint
             android:id="@+id/fragmentRecyclerView"
@@ -40,7 +42,15 @@
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/mainContainerLayout"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintVertical_bias="0.0"
+            motion:layout_constraintHorizontal_bias="0.0" />
+        <Constraint
+            motion:layout_editor_absoluteY="314dp"
+            android:layout_height="0dp"
+            motion:layout_editor_absoluteX="0dp"
+            android:layout_width="match_parent"
+            android:id="@+id/nested_content" />
     </ConstraintSet>
 
 

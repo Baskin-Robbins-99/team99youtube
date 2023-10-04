@@ -16,6 +16,8 @@ import com.example.team99.VideoDetailActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.DTO.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.VideoAdpter
+import com.example.team99.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
