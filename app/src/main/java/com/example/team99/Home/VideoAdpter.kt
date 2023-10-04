@@ -79,9 +79,9 @@ class VideoAdpter(private val mContext: Context) :
 
     override fun getItemViewType(position: Int): Int {
         val videoItem = videoItems[position]
-        return when (videoItem.type) {
-            1 -> VIEW_TYPE_POPULAR
-            2 -> VIEW_TYPE_CATEGORY
+        return when (videoItem) {
+            is VideoItem -> VIEW_TYPE_POPULAR
+
             // 필요한 경우 CategoryItem과 ChannelItem을 구분하여 처리
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -131,13 +131,13 @@ class VideoAdpter(private val mContext: Context) :
     }
 
     fun setCategoryVideos(newVideos: List<VideoItem>) {
-        val populars = videoItems.filter { it.type == 1 }
+//        val populars = videoItems.filter { it.type == 1 }
         videoItems.clear()
         if (newVideos.isNotEmpty()) {
             videoItems.addAll(newVideos)
 
         }
-        videoItems.addAll(populars)
+        videoItems.addAll(videoItems)
         notifyDataSetChanged()
     }
 

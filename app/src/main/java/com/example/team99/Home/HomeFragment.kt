@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.team99.CategoryAdapter
 import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.databinding.FragmentHomeBinding
@@ -20,6 +21,8 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
     private lateinit var adapter: VideoAdpter
+    private lateinit var categoryadapter: CategoryAdapter
+
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
 
@@ -39,6 +42,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = VideoAdpter(mContext)
+        categoryadapter = CategoryAdapter((mContext))
         mContext = requireContext()
         binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
@@ -46,26 +50,30 @@ class HomeFragment : Fragment() {
 
         binding.cateoryRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-        binding.cateoryRecycle.adapter = adapter
+        binding.cateoryRecycle.adapter = categoryadapter
+        categoryadapter.notifyDataSetChanged()
 
-        // 카테고리 선택 시 동영상 목록 업데이트
+
 
         binding.aniChip.setOnClickListener {
             val animalId = categoryItem.filter { item ->
 
-                item.type == 2 &&
+//                item.type == 2 &&
                 item.categoryId == "15"
             }
 
             Log.d("aniChip","nyh ${animalId}")
-            adapter.setCategoryVideos(animalId)
+            categoryadapter.setCategoryVideos(animalId)
+            categoryadapter.notifyDataSetChanged()
         }
         binding.musicChip.setOnClickListener {
             val musicId = categoryItem.filter { item ->
-                item.type == 2 &&
-                item.categoryId == "20"
+//                item. == 2 &&
+                item.categoryId == "10"
             }
-            adapter.setCategoryVideos(musicId)
+            Log.d("musicChip","nyh ${musicId}")
+            categoryadapter.setCategoryVideos(musicId)
+            categoryadapter.notifyDataSetChanged()
         }
 
         getVideoData()
@@ -94,14 +102,15 @@ class HomeFragment : Fragment() {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, 1)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, 2)
+                                        val videoItem = VideoItem(thumbnails, title, categoryId)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         Log.d("HomegetData","nyh ${categoryItem}")
                                     }
                                 }
                                 adapter.setVideos(categoryItem)
+                                categoryadapter.setCategoryVideos(categoryItem)
                             }
                         } else {
                         }
