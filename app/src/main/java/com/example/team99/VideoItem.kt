@@ -1,10 +1,10 @@
 package com.example.team99
 
-import android.os.Parcelable
+
+import java.io.Serializable
 
 
-@Parcelize
 data class VideoItem(
     val thumbnails: String,
-    val title: String,
-): Parcelable
+    val title: String
+): Serializable

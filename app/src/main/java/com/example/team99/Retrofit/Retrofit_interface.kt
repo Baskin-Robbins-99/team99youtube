@@ -1,7 +1,7 @@
 package com.example.team99.Retrofit
 
-import com.example.team99.DTO.YoutubeCategoriesApi
-import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.YoutubeCategoriesApi
+import com.example.team99.YoutubeVideosApi
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

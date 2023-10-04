@@ -86,8 +86,8 @@ class VideoAdpter(private val mContext: Context) :
 
     inner class PopularHolder(val binding: VideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var thumbnails: ImageView = binding.thumbnailsIv
-        var title: TextView = binding.titleTv
+        var thumbnails: ImageView = binding.thumbnails
+        var title: TextView = binding.title
 
         init {
             thumbnails.setOnClickListener {
@@ -104,8 +104,8 @@ class VideoAdpter(private val mContext: Context) :
 
     inner class CategoryHolder(private val binding: VideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var thumbnails: ImageView = binding.thumbnailsIv
-        var title: TextView = binding.titleTv
+        var thumbnails: ImageView = binding.thumbnails
+        var title: TextView = binding.title
 
         init {
             thumbnails.setOnClickListener {

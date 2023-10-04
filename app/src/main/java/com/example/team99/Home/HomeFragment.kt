@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.CategoryVideoItem
-import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.YoutubeVideosApi
 import com.example.team99.Home.ViewModel.VideoCategoryViewModel
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.VideoAdpter

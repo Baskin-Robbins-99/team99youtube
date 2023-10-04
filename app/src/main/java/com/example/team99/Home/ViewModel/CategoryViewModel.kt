@@ -3,7 +3,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.team99.CategoryVideoItem
 import com.example.team99.Retrofit.RetrofitClient
-import com.example.team99.DTO.YoutubeCategoriesApi
+import com.example.team99.YoutubeCategoriesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import retrofit2.Call

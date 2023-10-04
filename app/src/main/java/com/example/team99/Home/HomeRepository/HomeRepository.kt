@@ -1,10 +1,8 @@
 package com.example.team99.Home.HomeRepository
 
-import com.example.team99.Util.Constants.API_KEY
-import com.example.team99.DTO.Item
-import com.example.team99.DTO.YoutubeCategoriesApi
+import com.example.team99.Item
+import com.example.team99.YoutubeCategoriesApi
 import com.example.team99.Retrofit.RetrofitClient
-import com.example.team99.Util.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
