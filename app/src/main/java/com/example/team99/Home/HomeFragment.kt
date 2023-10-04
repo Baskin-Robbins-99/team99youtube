@@ -1,6 +1,7 @@
 package com.example.team99.Home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,9 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.CategoryVideoItem
 import com.example.team99.YoutubeVideosApi
 import com.example.team99.Home.ViewModel.VideoCategoryViewModel
+import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.Home.VideoAdapter
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.VideoAdpter
 import com.example.team99.VideoItem
+import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -33,20 +37,21 @@ class HomeFragment : Fragment() {
         mContext = context
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = VideoAdpter(mContext)
 
+        binding.popularRecycle.layoutManager =
+        mContext = requireContext()
+        adapter = VideoAdapter(mContext)
         binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.popularRecycle.adapter = adapter
@@ -68,6 +73,8 @@ class HomeFragment : Fragment() {
                 binding.cateoryRecycle.visibility = View.VISIBLE
             }
         }
+        binding.popularRecycle.adapter = adapter
+
         getVideoData()
     }
 
@@ -97,6 +104,8 @@ class HomeFragment : Fragment() {
                                 adapter.notifyDataSetChanged()
                             }
                         } else {
+
+
                         }
                     }
                 }
@@ -104,7 +113,10 @@ class HomeFragment : Fragment() {
                 override fun onFailure(call: Call<YoutubeVideosApi>, t: Throwable) {
 
                 }
-
             })
     }
 }
+
+
+
+

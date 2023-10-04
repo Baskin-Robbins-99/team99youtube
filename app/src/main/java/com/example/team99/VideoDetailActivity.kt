@@ -2,6 +2,7 @@ package com.example.team99
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.ActivityVideoDetailBinding
 
 class VideoDetailActivity : AppCompatActivity() {
@@ -21,5 +22,4 @@ class VideoDetailActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }
