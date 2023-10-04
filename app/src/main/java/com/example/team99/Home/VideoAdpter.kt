@@ -1,4 +1,4 @@
-package com.example.team99
+package com.example.team99.Home
 
 import android.content.Context
 import android.content.Intent
@@ -8,14 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.team99.Home.VideoItem
+import com.example.team99.VideoDetailActivity
 import com.example.team99.databinding.VideoItemBinding
 
 class VideoAdpter(private val mContext: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var videoItems: ArrayList<VideoItem> = ArrayList()
-    var catevideoItems: ArrayList<CategoryVideoItem> = ArrayList()
 
     private val VIEW_TYPE_POPULAR = 1
     private val VIEW_TYPE_CATEGORY = 2
@@ -25,17 +24,17 @@ class VideoAdpter(private val mContext: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            VIEW_TYPE_POPULAR -> {
+            1 -> {
                 val binding = VideoItemBinding.inflate(inflater, parent, false)
                 PopularHolder(binding)
             }
 
-            VIEW_TYPE_CATEGORY -> {
+            2 -> {
                 val binding = VideoItemBinding.inflate(inflater, parent, false)
                 CategoryHolder(binding)
             }
 
-            VIEW_TYPE_CHANNEL -> {
+            3 -> {
                 val binding = VideoItemBinding.inflate(inflater, parent, false)
                 ChannelHolder(binding)
             }
@@ -45,28 +44,31 @@ class VideoAdpter(private val mContext: Context) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val videoItem = videoItems[position]
         when (getItemViewType(position)) {
-            VIEW_TYPE_POPULAR -> {
+            1 -> {
                 val popularHolder = holder as PopularHolder
-                val videoItem = videoItems[position]
                 Glide.with(mContext)
                     .load(videoItem.thumbnails)
                     .into(popularHolder.thumbnails)
                 popularHolder.title.text = videoItem.title
             }
 
-            VIEW_TYPE_CATEGORY -> {
+            2 -> {
                 val categoryHolder = holder as CategoryHolder
-                val videoItem = videoItems[position]
                 Glide.with(mContext)
                     .load(videoItem.thumbnails)
                     .into(categoryHolder.thumbnails)
                 categoryHolder.title.text = videoItem.title
             }
 
-            VIEW_TYPE_CHANNEL -> {
-                val channelHolder = holder as ChannelHolder
-                // 채널 아이템 바인딩 코드 작성
+            3 -> {
+//                val channelHolder = holder as ChannelHolder
+//                Glide.with(mContext)
+//                    .load(videoItem.thumbnails)
+//                    .into(categoryHolder.thumbnails)
+//                channelHolder.title.text = videoItem.title
+
             }
         }
     }
@@ -77,8 +79,9 @@ class VideoAdpter(private val mContext: Context) :
 
     override fun getItemViewType(position: Int): Int {
         val videoItem = videoItems[position]
-        return when (videoItem) {
-            is VideoItem -> VIEW_TYPE_POPULAR
+        return when (videoItem.type) {
+            1 -> VIEW_TYPE_POPULAR
+            2 -> VIEW_TYPE_CATEGORY
             // 필요한 경우 CategoryItem과 ChannelItem을 구분하여 처리
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -87,8 +90,8 @@ class VideoAdpter(private val mContext: Context) :
 
     inner class PopularHolder(val binding: VideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var thumbnails: ImageView = binding.thumbnails
-        var title: TextView = binding.title
+        var thumbnails: ImageView = binding.thumbnailsIv
+        var title: TextView = binding.titleTv
 
         init {
             thumbnails.setOnClickListener {
@@ -105,8 +108,8 @@ class VideoAdpter(private val mContext: Context) :
 
     inner class CategoryHolder(private val binding: VideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        var thumbnails: ImageView = binding.thumbnails
-        var title: TextView = binding.title
+        var thumbnails: ImageView = binding.thumbnailsIv
+        var title: TextView = binding.titleTv
 
         init {
             thumbnails.setOnClickListener {
@@ -114,7 +117,7 @@ class VideoAdpter(private val mContext: Context) :
                 if (position != RecyclerView.NO_POSITION) {
                     videoItems[position]
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
-                    intent.putExtra("key", videoItems)
+                    intent.putExtra("key", videoItems.toTypedArray())
                     thumbnails.context.startActivity(intent)
                 }
             }
@@ -123,15 +126,29 @@ class VideoAdpter(private val mContext: Context) :
 
     inner class ChannelHolder(private val binding: VideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        // 채널 아이템 바인딩 코드 작성
+        var thumbnails: ImageView = binding.thumbnailsIv
+        var title: TextView = binding.titleTv
     }
 
-    fun setVideos(newCategoryVideos: List<CategoryVideoItem>) {
-        catevideoItems.clear()
-        if (newCategoryVideos.isNotEmpty()) {
-            catevideoItems.addAll(newCategoryVideos)
+    fun setCategoryVideos(newVideos: List<VideoItem>) {
+        val populars = videoItems.filter { it.type == 1 }
+        videoItems.clear()
+        if (newVideos.isNotEmpty()) {
+            videoItems.addAll(newVideos)
+
+        }
+        videoItems.addAll(populars)
+        notifyDataSetChanged()
+    }
+
+    fun setVideos(newVideos: List<VideoItem>){
+        videoItems.clear()
+        if (newVideos.isNotEmpty()) {
+            videoItems.addAll(newVideos)
+
         }
         notifyDataSetChanged()
+
     }
 
 
