@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,28 +30,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/playerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:resize_mode="fill"
-        app:show_subtitle_button="true"
-        tools:fastforward_increment="16000"
-        tools:resize_mode="fixed_width"
-        tools:rewind_increment="15000"
-        tools:show_buffering="when_playing"
-        tools:show_fastforward_button="true"
-        tools:show_next_button="false"
-        tools:show_previous_button="false"
-        tools:show_rewind_button="true"
-        tools:show_subtitle_button="true"
-        tools:use_artwork="true"
-        tools:use_controller="true"
-        tools:use_sensor_rotation="true"
-        app:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
-        app:layout_constraintStart_toStartOf="@id/mainContainerLayout"
-        app:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
 
     <ImageView
         android:id="@+id/bottomPlayerControlButton"

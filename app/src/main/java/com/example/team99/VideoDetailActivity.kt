@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.team99.MyVideoFragment.Database.StorageDAO
 import com.example.team99.databinding.ActivityVideoDetailBinding
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -23,15 +22,19 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private val video: MediaStore.Video? = null
     private var toolbar: Toolbar? = null
-    private val database: StorageDAO? = null
+
+    //private val database: StorageDAO? = null
     private lateinit var favIcon: MenuItem
 
 
     private lateinit var binding: ActivityVideoDetailBinding
-    var backPressedTime : Long = 0
+    var backPressedTime: Long = 0
     private var videoPlayer: SimpleExoPlayer? = null
-    private var sampleUrl = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
+    private var sampleUrl =
+        "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4"
     private lateinit var video_player_view: PlayerView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,21 +95,21 @@ class VideoDetailActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_activity_video_detail, menu)
         favIcon = menu.findItem(R.id.bookmark)
-        favIcon.isVisible=true
-        if (isFav()) favIcon.setIcon(R.drawable.ic_bookmark) else favIcon.setIcon(R.drawable.ic_bookmark_border)
+        favIcon.isVisible = true
+        // if (isFav()) favIcon.setIcon(R.drawable.ic_bookmark) else favIcon.setIcon(R.drawable.ic_bookmark_border)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val itemId = item.itemId
         if (itemId == R.id.share) {
-            shareVideo()
+            // shareVideo()
         } else if (itemId == R.id.bookmark) {
-            if (isFav()) {
-                deleteVideo()
-            } else {
-                saveVideo()
-            }
+            //  if (isFav()) {
+            //       deleteVideo()
+            //   } else {
+            //     saveVideo()
+            //}
         }
         return super.onOptionsItemSelected(item)
     }
@@ -122,8 +125,9 @@ class VideoDetailActivity : AppCompatActivity() {
         backPressedTime = System.currentTimeMillis()
     }
 
-}
 
-private fun <ActionBar> ActionBar?.setTitle(nothing: Nothing?) {
+    private fun <ActionBar> ActionBar?.setTitle(nothing: Nothing?) {
 
+
+    }
 }

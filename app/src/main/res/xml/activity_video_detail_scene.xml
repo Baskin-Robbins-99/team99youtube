@@ -17,15 +17,6 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/playerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            motion:layout_constraintEnd_toEndOf="@id/mainContainerLayout"
-            motion:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
-            motion:layout_constraintTop_toTopOf="@id/mainContainerLayout"
-            motion:layout_constraintStart_toStartOf="@id/mainContainerLayout" />
-
-        <Constraint
             android:id="@+id/mainContainerLayout"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
@@ -51,6 +42,14 @@
             motion:layout_editor_absoluteX="0dp"
             android:layout_width="match_parent"
             android:id="@+id/nested_content" />
+        <Constraint
+            android:layout_marginEnd="12dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="@id/bottomPlayerControlButton"
+            motion:layout_constraintBottom_toBottomOf="@id/bottomPlayerControlButton"
+            android:layout_width="0dp"
+            motion:layout_constraintEnd_toStartOf="@id/bottomPlayerControlButton"
+            android:id="@+id/bottomTitleTextView" />
     </ConstraintSet>
 
 
@@ -77,14 +76,6 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintVertical_bias="1.0" />
 
-        <Constraint
-            android:id="@+id/playerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="@id/mainContainerLayout"
-            motion:layout_constraintDimensionRatio="H, 1:2.5"
-            motion:layout_constraintStart_toStartOf="@id/mainContainerLayout"
-            motion:layout_constraintTop_toTopOf="@id/mainContainerLayout" />
     </ConstraintSet>
 
 </MotionScene>
