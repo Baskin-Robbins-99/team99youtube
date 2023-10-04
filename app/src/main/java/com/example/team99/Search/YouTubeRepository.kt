@@ -17,8 +17,6 @@ class YouTubeRepository {
                         mapApiToUi(searchVideoItem)
                     }
 
-
-
                 }
                 else -> {
                     // Log or report the error message
