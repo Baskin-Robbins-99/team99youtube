@@ -16,7 +16,6 @@ import com.example.team99.VideoAdpter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 //import com.example.team99.Home.ViewModel.HomeViewModel
-import com.example.team99.MyVideoFragment
 import com.example.team99.VideoDetailActivity
 import com.example.team99.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
