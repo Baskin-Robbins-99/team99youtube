@@ -1,7 +1,6 @@
 package com.example.team99
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -100,8 +99,6 @@ class MainActivity : AppCompatActivity() {
     companion object{
 
         private const val PREF_NAME = "MyAppPreferences"
-//        private const val KEY_ITEM = "selectedItem" 키는 item의 title로 바꿈
-        //리스트 타입으로 넣어야한다. 기존의 값과
         fun saveSelectedItem(context: Context,  items: VideoItem) {
             val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -112,16 +109,17 @@ class MainActivity : AppCompatActivity() {
             //정보를 줄 때와 받을 때 같은 데이터 타입으로 해줘야한다.
         }
 
-        fun getSelectedItem(context: Context, items: ArrayList<VideoItem>): ArrayList<VideoItem>{
+        fun getSelectedItem(context: Context, item: VideoItem): ArrayList<VideoItem>{
             val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val allEntries: Map<String, *> = sharedPreferences.all
-            val clickItem = ArrayList<VideoItem>()
-            val gson = GsonBuilder().create()
+            val clickitem = ArrayList<VideoItem>()
+            val prefenceString = sharedPreferences.getString(item.title, null)
+            val gson = Gson()
             for ((key, value) in allEntries) {
                 val item = gson.fromJson(value as String, VideoItem::class.java)
-                clickItem.add(item)
+                clickitem.add(item)
             }
-            return clickItem
+            return clickitem
         }
         fun deleteItem(context: Context, title:String) {
             val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

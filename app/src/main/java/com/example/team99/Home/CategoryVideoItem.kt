@@ -1,13 +1,10 @@
 package com.example.team99.Home
 
-
 import java.io.Serializable
 
 
-
-data class VideoItem(
+data class CategoryVideoItem(
     val thumbnails: String,
     val title: String,
-    val categoryId: String?,
-    val type: Int
+    val categoryId: Int
 ): Serializable

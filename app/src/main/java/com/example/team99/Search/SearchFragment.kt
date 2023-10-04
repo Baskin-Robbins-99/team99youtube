@@ -9,15 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.example.team99.DTO.YoutubeCategoriesApi
-import com.example.team99.DTO.YoutubeVideosApi
-import com.example.team99.Home.VideoItem
 import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.YoutubeVideosApi
 import com.example.team99.databinding.FragmentSearchBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Query
 
 
 class SearchFragment : Fragment() {
@@ -62,6 +59,7 @@ class SearchFragment : Fragment() {
             "snippet",
             "mostPopular",
             "KR",
+            25,
             "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc"
         )
 

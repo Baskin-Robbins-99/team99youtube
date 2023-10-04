@@ -50,13 +50,11 @@ class VideoAdapter(private val mContext: Context) :
        override fun onClick(view: View) {
             val position = adapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return
             val selectedItem = videoItems[position]
-
-            MainActivity.saveSelectedItem(view.context, selectedItem)
-           notifyItemChanged(position)
-            Log.d("item","${selectedItem}")
+            MainActivity.saveSelectedItem(view.context, videoItems)
             val intent = Intent(view.context, VideoDetailActivity::class.java)
             intent.putExtra("videoitem", selectedItem)
             view.context.startActivity(intent)
+            Log.d("item", "Received VideoItem: ${selectedItem}")
         }
 
     }
