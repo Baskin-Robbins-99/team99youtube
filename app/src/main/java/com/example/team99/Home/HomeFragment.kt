@@ -1,20 +1,15 @@
 package com.example.team99.Home
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.team99.Home.ViewModel.HomeViewModel
-import com.example.team99.MyVideoFragment
-import com.example.team99.VideoDetailActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
@@ -25,43 +20,62 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
     private lateinit var adapter: VideoAdpter
+    private var popularItem = mutableListOf<VideoItem>()
+    private var categoryItem = mutableListOf<VideoItem>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
 
-    private  lateinit var binding: FragmentHomeBinding
-    lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // 뷰모델이 가지고 있는 값의 변경사항을 관찰할 수 있는 라이브 데이터를 옵저빙한다.
-        homeViewModel.currenValue.observe(viewLifecycleOwner, Observer {
-            binding.homeFrag.text = it.toString()
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mContext = requireContext()
         adapter = VideoAdpter(mContext)
-        binding.popularRecyclerview.layoutManager =
+        mContext = requireContext()
+        binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-        binding.popularRecyclerview.adapter = adapter
-        getVideoData()
+        binding.popularRecycle.adapter = adapter
 
+        binding.cateoryRecycle.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.cateoryRecycle.adapter = adapter
+
+        // 카테고리 선택 시 동영상 목록 업데이트
+
+        binding.aniChip.setOnClickListener {
+            val animalId = categoryItem.filter { item ->
+
+                item.type == 2 &&
+                item.categoryId == "15"
+            }
+
+            Log.d("aniChip","nyh ${animalId}")
+            adapter.setCategoryVideos(animalId)
+        }
+        binding.musicChip.setOnClickListener {
+            val musicId = categoryItem.filter { item ->
+                item.type == 2 &&
+                item.categoryId == "20"
+            }
+            adapter.setCategoryVideos(musicId)
+        }
+
+        getVideoData()
     }
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
                     call: Call<YoutubeVideosApi>,
                     response: Response<YoutubeVideosApi>
@@ -72,20 +86,24 @@ class HomeFragment : Fragment() {
                         if (videosApi != null) {
                             val items = videosApi.items
                             if (items != null) {
+                                categoryItem.clear()
+                                popularItem.clear()
                                 for (item in items) {
                                     val snippet = item?.snippet
                                     if (snippet != null) {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
-                                        val videoItem = VideoItem(thumbnails, title)
-                                        adapter.videoItems.add(videoItem)
+                                        val categoryId = snippet.categoryId ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, 1)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, 2)
+                                        categoryItem.add(categoryVideoItem)
+                                        popularItem.add(videoItem)
+                                        Log.d("HomegetData","nyh ${categoryItem}")
                                     }
                                 }
-                                adapter.notifyDataSetChanged()
+                                adapter.setVideos(categoryItem)
                             }
                         } else {
-
-
                         }
                     }
                 }
