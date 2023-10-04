@@ -1,34 +1,41 @@
-//package com.example.team99.Home.HomeRepository
+package com.example.team99.Home.HomeRepository
 
-//import android.app.Application
-//import androidx.lifecycle.MutableLiveData
+import com.example.team99.Item
+import com.example.team99.YoutubeCategoriesApi
+import com.example.team99.Retrofit.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-//class HomeRepository(application: Application) {
+class VideoCategoryRepository {
+    fun getVideoCategories(
+        part: String,
+        regionCode: String,
+        callback: (List<Item>?) -> Unit
+    ) {
+        val call = RetrofitClient.apiService().categoryVideo("snippet", "","","",0)
 
-    //Retrofit 연결
+        if (call != null) {
+            call.enqueue(object : Callback<YoutubeCategoriesApi?> {
 
-//   suspend fun retrofitSelectAllTodo(): EXDataClass {
+                override fun onResponse(
+                    call: Call<YoutubeCategoriesApi?>,
+                    response: Response<YoutubeCategoriesApi?>
+                ) {
 
-//       val response = ObjectClass.getRetrofitService.get인터페이스의 funtion
-//              return if (response.isSuccessful) response.body() as EXDataClass else EXDataClass(
-//                    ArrayList()
-//               )
-//   }
+                    if (response.isSuccessful) {
+                        val YoutubeVideoCategory = response.body()
+                        val videoCategories = YoutubeVideoCategory?.items
+                        callback(videoCategories)
+                    } else {
+                        callback(null)
+                    }
+                }
 
-    // singleton pattern
-    //   companion object {
-//  private var instance: HomeRepository? = null
-
-//      fun getInstance(application: Application): HomeRepository? {
-//           if (instance == null) instance = HomeRepository(application)
-//         return  instance
-//      }
-//   }
-    // Insert
-//  suspend fun retrofitInsertTodo(realDataClass: realDataClass) : Response<JsonObject> {
-//       return retrofitObject.objectvalService.interface suspendfunPostBoard(realDataClass.title, realDataClass.contents )
-//   }
-
-
-
-//}
+                override fun onFailure(call: Call<YoutubeCategoriesApi?>, t: Throwable) {
+                    callback(null)
+                }
+            })
+        }
+    }
+}
