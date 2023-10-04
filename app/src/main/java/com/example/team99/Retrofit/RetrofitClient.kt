@@ -12,9 +12,25 @@ object RetrofitClient {
 
         val gson = GsonBuilder().setLenient().create()
 
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.NONE
+        }).addInterceptor {
+
+            //Request
+            val request = it.request()
+                .newBuilder()
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+
+            //Response
+            val response = it.proceed(request)
+            response
+        }.build()
+
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(okHttpClient)
             .build()
     }
         fun apiService(): Retrofit_interface{
