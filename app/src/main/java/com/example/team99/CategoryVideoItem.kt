@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class VideoItem(
+data class CategoryVideoItem(
     val thumbnails: String,
     val title: String,
-): Parcelable
+    val categoryId: Int
+) : Parcelable

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="video"
-            type="com.example.team99.DTO.YoutubeVideosApi.Item" />
+            type="com.example.team99.YoutubeVideosApi" />
     </data>
 <FrameLayout
     android:layout_width="match_parent"

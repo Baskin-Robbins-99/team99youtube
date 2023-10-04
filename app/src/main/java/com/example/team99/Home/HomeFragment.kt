@@ -10,13 +10,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.CategoryVideoItem
+import com.example.team99.YoutubeVideosApi
 import com.example.team99.Home.ViewModel.VideoCategoryViewModel
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.VideoAdpter
 import com.example.team99.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,24 +52,24 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.popularRecycle.adapter = adapter
 
-
         // 카테고리 선택 시 동영상 목록 업데이트
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            val selectedChip = group.findViewById<Chip>(checkedId)
-            selectedChip?.let { chip ->
+        val categoryChips = listOf(binding.allChip, binding.gameChip, binding.aniChip)
+
+        for (chip in categoryChips) {
+            chip.setOnClickListener {
                 val selectedCategory = chip.text.toString()
                 viewModel.selectCategory(selectedCategory)
             }
         }
 
         // Kotlin Flow를 사용하여 선택된 카테고리를 관찰하고 동영상 목록 업데이트
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.videoList.collect { videos: List<VideoItem> ->
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.videoList.collect { videos: List<CategoryVideoItem> ->
                 adapter.setVideos(videos)
                 binding.cateoryRecycle.visibility = View.VISIBLE
-                getVideoData()
             }
         }
+        getVideoData()
     }
 
     private fun getVideoData() {
@@ -107,8 +109,3 @@ class HomeFragment : Fragment() {
             })
     }
 }
-
-
-
-
-

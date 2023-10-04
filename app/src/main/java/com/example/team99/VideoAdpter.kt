@@ -14,6 +14,7 @@ class VideoAdpter(private val mContext: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var videoItems: ArrayList<VideoItem> = ArrayList()
+    var catevideoItems: ArrayList<CategoryVideoItem> = ArrayList()
 
     private val VIEW_TYPE_POPULAR = 1
     private val VIEW_TYPE_CATEGORY = 2
@@ -110,7 +111,7 @@ class VideoAdpter(private val mContext: Context) :
             thumbnails.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val clickItem = videoItems[position]
+                    videoItems[position]
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
                     intent.putExtra("key", videoItems)
                     thumbnails.context.startActivity(intent)
@@ -123,12 +124,15 @@ class VideoAdpter(private val mContext: Context) :
         RecyclerView.ViewHolder(binding.root) {
         // 채널 아이템 바인딩 코드 작성
     }
-    fun setVideos(newVideos: List<VideoItem?>?) {
-        videoItems.clear()
-        if (newVideos != null) {
-            videoItems.addAll(newVideos.filterNotNull())
+
+    fun setVideos(newCategoryVideos: List<CategoryVideoItem>) {
+        catevideoItems.clear()
+        if (newCategoryVideos.isNotEmpty()) {
+            catevideoItems.addAll(newCategoryVideos)
         }
         notifyDataSetChanged()
     }
+
+
 }
 

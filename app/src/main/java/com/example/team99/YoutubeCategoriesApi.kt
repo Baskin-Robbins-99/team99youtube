@@ -1,4 +1,4 @@
-package com.example.team99.DTO
+package com.example.team99
 
 
 import com.google.gson.annotations.SerializedName
