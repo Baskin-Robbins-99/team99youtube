@@ -8,24 +8,24 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/thumbnails"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/thumbnails_iv"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:adjustViewBounds="true"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="150dp"
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="제목"
+        android:ems="12"
+        android:maxLines="2"
         android:textColor="@color/white"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnails" />
+        app:layout_constraintTop_toBottomOf="@+id/thumbnails_iv" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

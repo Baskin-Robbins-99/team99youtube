@@ -1,14 +1,17 @@
 package com.example.team99.Retrofit
 
-import com.example.team99.Constants
+import com.example.team99.Util.Constants
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object RetrofitClient {
 
     private fun getRetrofit():Retrofit{
+
+        val token: String = ""
 
         val gson = GsonBuilder().setLenient().create()
 

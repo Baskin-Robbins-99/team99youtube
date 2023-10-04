@@ -11,13 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.CategoryVideoItem
-import com.example.team99.YoutubeVideosApi
+import com.example.team99.DTO.YoutubeVideosApi
 import com.example.team99.Home.ViewModel.VideoCategoryViewModel
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.VideoAdpter
 import com.example.team99.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
-import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -73,7 +72,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getVideoData() {
-        RetrofitClient.apiService
+        RetrofitClient.apiService()
             .popularVideo("snippet", "mostPopular", "KR", "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
                 override fun onResponse(

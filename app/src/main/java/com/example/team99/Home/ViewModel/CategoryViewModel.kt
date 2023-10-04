@@ -3,7 +3,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.team99.CategoryVideoItem
 import com.example.team99.Retrofit.RetrofitClient
-import com.example.team99.YoutubeCategoriesApi
+import com.example.team99.DTO.YoutubeCategoriesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import retrofit2.Call
@@ -25,7 +25,7 @@ class VideoCategoryViewModel : ViewModel() {
     fun updateVideoList() {
         val categoryId = getCategoryIdFromSelectedCategory()
         if (categoryId != null) {
-            RetrofitClient.apiService
+            RetrofitClient.apiService()
                 .categoryVideo("snippet", "mostPopular", "KR", "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc", 0)
                 ?.enqueue(object : Callback<YoutubeCategoriesApi?> {
                     override fun onResponse(
