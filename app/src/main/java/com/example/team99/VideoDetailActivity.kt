@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.team99.MyVideoFragment.Database.StorageDAO
 import com.example.team99.databinding.ActivityVideoDetailBinding
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -21,8 +22,9 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private val video: MediaStore.Video? = null
     private var toolbar: Toolbar? = null
-    private val database: DAO? = null
-    private var favIcon: MenuItem? = null
+    private val database: StorageDAO? = null
+    private lateinit var favIcon: MenuItem
+
 
     private lateinit var binding: ActivityVideoDetailBinding
     var backPressedTime : Long = 0
@@ -79,7 +81,6 @@ class VideoDetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar.setTitle(null)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        Tools.setSystemBarColor(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -89,8 +90,8 @@ class VideoDetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_activity_video_detail, menu)
-        favIcon = menu.findItem(R.id.save)
-        favIcon.setVisible(!video.live)
+        favIcon = menu.findItem(R.id.bookmark)
+        favIcon.isVisible=true
         if (isFav()) favIcon.setIcon(R.drawable.ic_bookmark) else favIcon.setIcon(R.drawable.ic_bookmark_border)
         return true
     }
@@ -99,7 +100,7 @@ class VideoDetailActivity : AppCompatActivity() {
         val itemId = item.itemId
         if (itemId == R.id.share) {
             shareVideo()
-        } else if (itemId == R.id.save) {
+        } else if (itemId == R.id.bookmark) {
             if (isFav()) {
                 deleteVideo()
             } else {
@@ -109,43 +110,7 @@ class VideoDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun shareVideo() {
-        val sharingIntent = Intent(Intent.ACTION_SEND)
-        sharingIntent.type = "text/plain"
-        sharingIntent.putExtra(
-            Intent.EXTRA_TEXT,
-            video.snippet.title + " " + AppConfig.youtube_url + video.contentDetails.videoId
-        )
-        startActivity(Intent.createChooser(sharingIntent, ""))
-    }
-
-    private fun isFav(): Boolean {
-        var isFav = false
-        for (dt in database.getAllFavorite()) {
-            if (dt.getVideoId().equals(video.contentDetails.videoId)) {
-                isFav = true
-            }
-        }
-        return isFav
-    }
-
-
-}
-
-//    //private fun preparePlayer() {
-//        exoPlayer = ExoPlayer.Builder(this).build()
-//        exoPlayer?.playWhenReady = true
-//        binding.playerView.player = exoPlayer
-//        val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory()
-//        val mediaItem = MediaItem.fromUri(URL)
-//        val mediaSource =
-//           DashMediaSource.Factory(defaultHttpDataSourceFactory).createMediaSource(mediaItem)
-//       exoPlayer?.setMediaSource(mediaSource)
-//       exoPlayer?.seekTo(playbackPosition)
-//       exoPlayer?.playWhenReady = playWhenReady
-//        exoPlayer?.prepare()
-//    }
-
+    
     override fun onBackPressed() {
         //2.5초이내에 한 번 더 뒤로가기 클릭 시
         if (System.currentTimeMillis() - backPressedTime < 2500) {
@@ -156,5 +121,9 @@ class VideoDetailActivity : AppCompatActivity() {
         backPressedTime = System.currentTimeMillis()
     }
 
+
+}
+
+private fun <ActionBar> ActionBar?.setTitle(nothing: Nothing?) {
 
 }
