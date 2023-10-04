@@ -9,9 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team99.CategoryAdapter
 import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.YoutubeChannelApi
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,9 +22,11 @@ class HomeFragment : Fragment() {
     private lateinit var mContext: Context
     private lateinit var adapter: VideoAdpter
     private lateinit var categoryadapter: CategoryAdapter
+    private lateinit var channeladapter: ChannelAdapter
 
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
+    private var channelItems = mutableListOf<ChannelItem>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,8 +44,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = VideoAdpter(mContext)
-        categoryadapter = CategoryAdapter((mContext))
+        categoryadapter = CategoryAdapter(mContext)
+        channeladapter = ChannelAdapter(mContext)
         mContext = requireContext()
+
+
         binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.popularRecycle.adapter = adapter
@@ -53,12 +58,16 @@ class HomeFragment : Fragment() {
         binding.cateoryRecycle.adapter = categoryadapter
         categoryadapter.notifyDataSetChanged()
 
+        binding.channelRecycler.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.channelRecycler.adapter = channeladapter
+        channeladapter.notifyDataSetChanged()
+
 
 
         binding.aniChip.setOnClickListener {
             val animalId = categoryItem.filter { item ->
 
-//                item.type == 2 &&
                 item.categoryId == "15"
             }
 
@@ -77,6 +86,7 @@ class HomeFragment : Fragment() {
         }
 
         getVideoData()
+        getChanelData()
     }
 
     private fun getVideoData() {
@@ -102,8 +112,9 @@ class HomeFragment : Fragment() {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId)
+                                        val chanelId = snippet.channelId ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         Log.d("HomegetData","nyh ${categoryItem}")
@@ -122,8 +133,46 @@ class HomeFragment : Fragment() {
                 }
             })
     }
+    private fun getChanelData() {
+        RetrofitClient.apiService()
+            .categoryChannel("snippet", "", 10, "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .enqueue(object : Callback<YoutubeChannelApi> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<YoutubeChannelApi>,
+                    response: Response<YoutubeChannelApi>
+                ) {
+                    if (response.isSuccessful) {
+                        val videosApi = response.body()
+                        if (videosApi != null) {
+                            val items = videosApi.items
+                            if (items != null) {
+                                for (item in items) {
+                                    val snippet = item?.snippet
+                                    if (snippet != null) {
+                                        val thumbnails = snippet.thumbnails?.default?.url ?: ""
+                                        val title = snippet.title ?: ""
+                                        val channelId = item.id ?: ""
+                                        val channelItem = ChannelItem(thumbnails, title, channelId)
+                                        channelItems.add(channelItem)
+                                        Log.d("HomeChannelgetData", "nyh ${channelItems}")
+                                    }
+                                }
+
+                                channeladapter.setChannels(channelItems)
+                            }
+                        } else {
+                            Log.d("HomeChannelgetData", "nyh ${channelItems}")
+
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<YoutubeChannelApi>, t: Throwable) {
+                    Log.d("HomeChannelgetData", "nyh ${t.message}")
+
+                }
+            })
+    }
+
 }
-
-
-
-

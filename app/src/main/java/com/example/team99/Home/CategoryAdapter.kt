@@ -1,4 +1,4 @@
-package com.example.team99
+package com.example.team99.Home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.VideoItemBinding
 
 class CategoryAdapter (private val mContext: Context) : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
