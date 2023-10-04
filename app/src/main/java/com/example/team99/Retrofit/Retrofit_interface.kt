@@ -12,6 +12,7 @@ interface Retrofit_interface {
         @Query("part")  part: String?,
         @Query("chart") chart: String?,
         @Query("regionCode") regionCode: String?,
+        @Query("maxResults") maxResults: Int?,
         @Query("key") key: String?
     ): Call<YoutubeVideosApi>
     @GET("youtube/v3/videos")
@@ -26,6 +27,7 @@ interface Retrofit_interface {
     fun categoryChannel (
         @Query("part") part : String?,
         @Query("id") id : String?,
+        @Query("maxResults") maxResults: Int?,
         @Query("key") key: String?
     ): Call<YoutubeVideosApi>
 }

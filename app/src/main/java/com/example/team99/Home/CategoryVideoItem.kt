@@ -1,4 +1,4 @@
-package com.example.team99
+package com.example.team99.Home
 
 import java.io.Serializable
 
