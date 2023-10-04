@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.team99.Home.HomeFragment
+import com.example.team99.Search.SearchFragment
 import com.example.team99.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

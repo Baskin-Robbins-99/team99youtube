@@ -154,7 +154,7 @@
                 tools:layout_editor_absoluteY="329dp" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/game_chip"
+                android:id="@+id/game_chip2"
                 android:layout_width="55dp"
                 android:layout_height="40dp"
                 android:text="게임"
