@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team99.Home.HomeFragment
+import com.example.team99.Home.VideoAdpter
 import com.example.team99.Home.VideoItem
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.databinding.ActivityVideoDetailBinding
@@ -70,7 +71,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", "YOUR_API_KEY_HERE")
+            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
                 override fun onResponse(
                     call: Call<YoutubeVideosApi>,
@@ -86,8 +87,10 @@ class VideoDetailActivity : AppCompatActivity() {
                                     if (snippet != null) {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
-                                        val description = snippet.description ?: "" // Description 추가
-                                        val videoItem = VideoItem(thumbnails, title, description)
+                                        val categoryId = snippet.categoryId ?: ""
+                                        val chanelId = snippet.channelId ?: ""
+                                        val description = snippet.description ?: ""// Description 추가
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId ,description)
                                         adapter.videoItems.add(videoItem)
                                     }
                                 }
