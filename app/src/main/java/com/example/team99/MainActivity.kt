@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
-            selectedItemId = R.id.home_frag
+            selectedItemId = R.id.popular_title_tv
         }
         replaceFragment(fragment = HomeFragment())
     }

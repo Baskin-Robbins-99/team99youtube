@@ -10,7 +10,7 @@ interface Retrofit_interface {
     @GET("youtube/v3/videos")
     fun popularVideo(
         @Query("part")  part: String?,
-        @Query("Chart") chart: String?,
+        @Query("chart") chart: String?,
         @Query("regionCode") regionCode: String?,
         @Query("key") key: String?
     ): Call<YoutubeVideosApi>
