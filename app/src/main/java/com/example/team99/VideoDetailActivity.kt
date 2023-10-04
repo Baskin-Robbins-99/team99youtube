@@ -2,6 +2,7 @@ package com.example.team99
 
 import android.content.Intent
 import android.os.Bundle
+import com.example.team99.Home.VideoItem
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
@@ -110,7 +111,7 @@ class VideoDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    
+
     override fun onBackPressed() {
         //2.5초이내에 한 번 더 뒤로가기 클릭 시
         if (System.currentTimeMillis() - backPressedTime < 2500) {
@@ -120,7 +121,6 @@ class VideoDetailActivity : AppCompatActivity() {
         Toast.makeText(this, "한번 더 클릭 시 홈으로 이동됩니다.", Toast.LENGTH_SHORT).show()
         backPressedTime = System.currentTimeMillis()
     }
-
 
 }
 

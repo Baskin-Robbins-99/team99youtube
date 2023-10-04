@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+<<<<<<< HEAD
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -14,6 +15,8 @@ import com.example.team99.MyVideoFragment.Database.AppDatabase
 import com.example.team99.MyVideoFragment.Database.StorageDAO
 import com.example.team99.MyVideoFragment.Database.StorageDatabase
 import com.example.team99.MyVideoFragment.DummyData
+=======
+>>>>>>> 68b113f90b6646ebd43389b14b4d837813f80f55
 import com.example.team99.MyVideoFragment.MyStorageAdapter
 import com.example.team99.databinding.FragmentMyVideoBinding
 
@@ -21,8 +24,11 @@ import com.example.team99.databinding.FragmentMyVideoBinding
 class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding
     lateinit var mystorageadapter: MyStorageAdapter
+<<<<<<< HEAD
     lateinit var helper: RoomOpenHelper
     lateinit var storageDao: StorageDAO
+=======
+>>>>>>> 68b113f90b6646ebd43389b14b4d837813f80f55
     private lateinit var myvideos : Context
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,16 +40,16 @@ class MyVideoFragment : Fragment() {
     ): View? {
 
         binding = FragmentMyVideoBinding.inflate(inflater, container, false)
-        saveStorage()
+//        saveStorage()
 
         return binding.root
     }
 
 
-    private fun saveStorage()  {
-        mystorageadapter = MyStorageAdapter(myvideos)
-            binding.myvdRcStorage.adapter = mystorageadapter
-    }
+//    private fun saveStorage()  {
+//        mystorageadapter = MyStorageAdapter(myvideos)
+//            binding.myvdRcStorage.adapter = mystorageadapter
+//    }
 }
 
 

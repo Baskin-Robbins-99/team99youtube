@@ -1,24 +1,20 @@
 package com.example.team99.Home
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.team99.Home.ViewModel.HomeViewModel
-import com.example.team99.MyVideoFragment
-import com.example.team99.VideoDetailActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.CategoryVideoItem
+import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.VideoAdpter
-import com.example.team99.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,37 +23,49 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
     private lateinit var adapter: VideoAdpter
+//    private val viewModel: VideoCategoryViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
 
-    private  lateinit var binding: FragmentHomeBinding
-    lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // 뷰모델이 가지고 있는 값의 변경사항을 관찰할 수 있는 라이브 데이터를 옵저빙한다.
-        homeViewModel.currenValue.observe(viewLifecycleOwner, Observer {
-            binding.homeFrag.text = it.toString()
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mContext = requireContext()
         adapter = VideoAdpter(mContext)
-        binding.popularRecyclerview.layoutManager =
+        mContext = requireContext()
+        binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-        binding.popularRecyclerview.adapter = adapter
-        getVideoData()
+        binding.popularRecycle.adapter = adapter
 
+        // 카테고리 선택 시 동영상 목록 업데이트
+        val categoryChips = listOf(binding.allChip, binding.gameChip, binding.aniChip)
+
+//        for (chip in categoryChips) {
+//            chip.setOnClickListener {
+//                val selectedCategory = chip.text.toString()
+//                viewModel.selectCategory(selectedCategory)
+//            }
+//        }
+
+        // Kotlin Flow를 사용하여 선택된 카테고리를 관찰하고 동영상 목록 업데이트
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewModel.videoList.collect { videos: List<CategoryVideoItem> ->
+//                adapter.setVideos(videos)
+//                binding.cateoryRecycle.visibility = View.VISIBLE
+//            }
+//        }
+        binding.popularRecycle.adapter = adapter
+
+        getVideoData()
     }
 
     private fun getVideoData() {
