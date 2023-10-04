@@ -15,7 +15,6 @@ class VideoAdpter(private val mContext: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var videoItems: ArrayList<VideoItem> = ArrayList()
-    var catevideoItems: ArrayList<CategoryVideoItem> = ArrayList()
 
     private val VIEW_TYPE_POPULAR = 1
     private val VIEW_TYPE_CATEGORY = 2
@@ -80,8 +79,9 @@ class VideoAdpter(private val mContext: Context) :
 
     override fun getItemViewType(position: Int): Int {
         val videoItem = videoItems[position]
-        return when (videoItem) {
-            is VideoItem -> VIEW_TYPE_POPULAR
+        return when (videoItem.type) {
+            1 -> VIEW_TYPE_POPULAR
+            2 -> VIEW_TYPE_CATEGORY
             // 필요한 경우 CategoryItem과 ChannelItem을 구분하여 처리
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -117,7 +117,7 @@ class VideoAdpter(private val mContext: Context) :
                 if (position != RecyclerView.NO_POSITION) {
                     videoItems[position]
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
-                    intent.putExtra("key", videoItems)
+                    intent.putExtra("key", videoItems.toTypedArray())
                     thumbnails.context.startActivity(intent)
                 }
             }
@@ -130,12 +130,25 @@ class VideoAdpter(private val mContext: Context) :
         var title: TextView = binding.titleTv
     }
 
-    fun setVideos(newCategoryVideos: List<CategoryVideoItem>) {
-        catevideoItems.clear()
-        if (newCategoryVideos.isNotEmpty()) {
-            catevideoItems.addAll(newCategoryVideos)
+    fun setCategoryVideos(newVideos: List<VideoItem>) {
+        val populars = videoItems.filter { it.type == 1 }
+        videoItems.clear()
+        if (newVideos.isNotEmpty()) {
+            videoItems.addAll(newVideos)
+
+        }
+        videoItems.addAll(populars)
+        notifyDataSetChanged()
+    }
+
+    fun setVideos(newVideos: List<VideoItem>){
+        videoItems.clear()
+        if (newVideos.isNotEmpty()) {
+            videoItems.addAll(newVideos)
+
         }
         notifyDataSetChanged()
+
     }
 
 
