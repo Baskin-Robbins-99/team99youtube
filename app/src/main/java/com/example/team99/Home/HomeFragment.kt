@@ -1,5 +1,6 @@
 package com.example.team99.Home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,14 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team99.CategoryVideoItem
 import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
-import com.example.team99.VideoAdpter
 import com.example.team99.databinding.FragmentHomeBinding
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +22,6 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: VideoAdpter
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
-//    private val viewModel: VideoCategoryViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -77,7 +73,7 @@ class HomeFragment : Fragment() {
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
