@@ -16,10 +16,14 @@ interface Retrofit_interface {
     ): Call<YoutubeVideosApi>
     @GET("youtube/v3/videoCategories")
     fun categoryVideo(
-
+        @Query("part") part : String?,
+        @Query("regionCode") regionCode : String?,
+        @Query("key") key : String
     ): Call<YoutubeCategoriesApi?>?
     @GET("youtube/v3/videos")
     fun categoryChannel (
-
+        @Query("part") part : String?,
+        @Query("id") id : String?,
+        @Query("key") key: String?
     ): Call<YoutubeVideosApi>
 }
