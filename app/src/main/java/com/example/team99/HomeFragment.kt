@@ -39,7 +39,6 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.popularRecyclerview.adapter = adapter
         getVideoData()
-
     }
 
     private fun getVideoData () {
