@@ -87,7 +87,8 @@ class HomeFragment : Fragment() {
                                     if (snippet != null) {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
-                                        val videoItem = VideoItem(thumbnails, title)
+                                        val description = snippet.description ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, description)
                                         adapter.videoItems.add(videoItem)
                                     }
                                 }
