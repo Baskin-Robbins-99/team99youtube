@@ -23,7 +23,7 @@ interface Retrofit_interface {
         @Query("key") key: String?,
         @Query("videoCategoryId") videoCategoryId: Int
     ): Call<YoutubeCategoriesApi?>?
-    @GET("youtube/v3/CH")
+    @GET("youtube/v3/")
     fun categoryChannel (
         @Query("part") part : String?,
         @Query("id") id : String?,

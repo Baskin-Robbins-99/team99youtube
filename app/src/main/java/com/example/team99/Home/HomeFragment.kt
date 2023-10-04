@@ -53,35 +53,60 @@ class HomeFragment : Fragment() {
         binding.cateoryRecycle.adapter = categoryadapter
         categoryadapter.notifyDataSetChanged()
 
-
-
-        binding.aniChip.setOnClickListener {
-            val animalId = categoryItem.filter { item ->
-
-//                item.type == 2 &&
-                item.categoryId == "15"
-            }
-
-            Log.d("aniChip","nyh ${animalId}")
-            categoryadapter.setCategoryVideos(animalId)
-            categoryadapter.notifyDataSetChanged()
-        }
         binding.musicChip.setOnClickListener {
             val musicId = categoryItem.filter { item ->
-//                item. == 2 &&
                 item.categoryId == "10"
             }
-            Log.d("musicChip","nyh ${musicId}")
             categoryadapter.setCategoryVideos(musicId)
             categoryadapter.notifyDataSetChanged()
         }
-
+        binding.gameChip.setOnClickListener {
+            val gameId = categoryItem.filter { item ->
+                item.categoryId == "20"
+            }
+            categoryadapter.setCategoryVideos(gameId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.petChip.setOnClickListener {
+            val petId = categoryItem.filter { item ->
+                item.categoryId == "15"
+            }
+            categoryadapter.setCategoryVideos(petId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.sportChip.setOnClickListener {
+            val sportId = categoryItem.filter { item ->
+                item.categoryId == "17"
+            }
+            categoryadapter.setCategoryVideos(sportId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.travelChip.setOnClickListener {
+            val travelId = categoryItem.filter { item ->
+                item.categoryId == "19"
+            }
+            categoryadapter.setCategoryVideos(travelId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.entertainChip.setOnClickListener {
+            val entertainId = categoryItem.filter { item ->
+                item.categoryId == "24"
+            }
+            categoryadapter.setCategoryVideos(entertainId)
+            categoryadapter.notifyDataSetChanged()
+        }
         getVideoData()
     }
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo(
+                "snippet",
+                "mostPopular",
+                "KR",
+                50,
+                "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc"
+            )
             .enqueue(object : Callback<YoutubeVideosApi> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
@@ -103,10 +128,11 @@ class HomeFragment : Fragment() {
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
                                         val videoItem = VideoItem(thumbnails, title, categoryId)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId)
+                                        val categoryVideoItem =
+                                            VideoItem(thumbnails, title, categoryId)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
-                                        Log.d("HomegetData","nyh ${categoryItem}")
+                                        Log.d("HomegetData", "nyh ${categoryItem}")
                                     }
                                 }
                                 adapter.setVideos(categoryItem)
