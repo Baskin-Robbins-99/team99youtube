@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.VideoItemBinding
 
 class VideoAdpter(private val mContext: Context) :

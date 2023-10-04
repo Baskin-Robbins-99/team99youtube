@@ -43,7 +43,7 @@ class VideoAdapter(private val mContext: Context) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         var thumbnails: ImageView = binding.thumbnails
         var title: TextView = binding.title
-        var item = binding.consItem
+        var item = binding.consTest
         init {
             item.setOnClickListener(this)
         }
