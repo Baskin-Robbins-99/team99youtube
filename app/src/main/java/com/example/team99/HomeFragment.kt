@@ -70,19 +70,3 @@ class HomeFragment : Fragment() {
         })}}
 
 
-
-
-
-
-
-
-
-//selectVideo()
-
-//    private fun selectVideo() = with(binding) {
-//        homeImgThumbnail.setOnClickListener {
-//            val intent = Intent(context, VideoDetailActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
-

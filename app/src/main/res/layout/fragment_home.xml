@@ -31,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popular_title_tv"
         tools:listitem="@layout/video_item" />
-
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
@@ -43,14 +42,30 @@
         app:layout_constraintTop_toBottomOf="@id/popular_recyclerview" />
 
     <Button
-        android:id="@+id/cartegory_btn"
+        android:id="@+id/total_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
-        android:text="Button"
+        android:text="종합"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+    <Button
+        android:id="@+id/music_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="음악"
+        app:layout_constraintStart_toEndOf="@+id/total_btn"
+        app:layout_constraintTop_toTopOf="@+id/total_btn" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="게임"
+        app:layout_constraintStart_toEndOf="@+id/music_btn"
+        app:layout_constraintTop_toTopOf="@+id/music_btn"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoty_video_recyclerview"
@@ -61,7 +76,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cartegory_btn"
+        app:layout_constraintTop_toBottomOf="@+id/total_btn"
         tools:listitem="@layout/video_item" />
 
     <View

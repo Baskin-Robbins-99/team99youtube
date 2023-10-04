@@ -20,5 +20,4 @@ object RetrofitClient {
         fun apiService(): Retrofit_interface{
             return getRetrofit().create(Retrofit_interface::class.java)
         }
-
 }
