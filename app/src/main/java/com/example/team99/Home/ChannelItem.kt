@@ -2,8 +2,10 @@ package com.example.team99.Home
 
 import java.io.Serializable
 
-data class ChannelItem(
-    val thumbnails: String,
-    val title: String,
-    val id: String
-) : Serializable
+data class ChannelItem    (
+val thumbnails: String,
+val title: String,
+val channelId: String
+
+
+): Serializable

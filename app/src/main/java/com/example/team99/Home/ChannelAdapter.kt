@@ -7,33 +7,41 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.team99.databinding.VideoItemBinding
 
-//class ChannelAdapter ( private val mContext: Context) : RecyclerView.Adapter<ChannelAdapter.ChannelHolder>() {
-//
-//     var channelItems: ArrayList<ChannelItem> = ArrayList()
-//
-//
-//     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelHolder {
-//          val binding = ChannelItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-//          return ChannelHolder(binding)
-//     }
-//
-//     override fun getItemCount(): Int {
-//          return channelItems.size
-//     }
-//
-//     override fun onBindViewHolder(holder: ChannelHolder, position: Int) {
-//          val channelItem = channelItems[position]
-//          Glide.with(mContext)
-//               .load(channelItems.thumbnails)
-//               .into(holder.thumbnails)
-//          holder.title.text = channelItem.title
-//     }
-//
-//     inner class ChannelHolder(private val binding: ChannelItemBinding) :RecyclerView.ViewHolder(binding.root) {
-//          var thumbnails: ImageView = binding.thumbnailsIv
-//          var title: TextView = binding.titleTv
-//     }
-//
-//
-//}
+class ChannelAdapter (private val mContext: Context) : RecyclerView.Adapter<ChannelAdapter.ChanelHolder>() {
+    var chanelItems: MutableList<ChannelItem> = ArrayList()
+
+    inner class ChanelHolder(val binding: VideoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        var thumbnails: ImageView = binding.thumbnailsIv
+        var title: TextView = binding.titleTv
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChanelHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = VideoItemBinding.inflate(inflater, parent, false)
+        return ChanelHolder(binding)
+    }
+    override fun onBindViewHolder(holder: ChanelHolder, position: Int) {
+        val channelVideoItems = chanelItems[position]
+        val channelHolder = holder as ChanelHolder
+        Glide.with(mContext)
+            .load(channelVideoItems.thumbnails)
+            .into(channelHolder.thumbnails)
+        channelHolder.title.text = channelVideoItems.title
+    }
+
+    override fun getItemCount(): Int {
+        return chanelItems.size
+    }
+
+    fun setChannels(newVideos: List<ChannelItem>) {
+        chanelItems.clear()
+        if (newVideos.isNotEmpty()) {
+            chanelItems.addAll(newVideos)
+        }
+        notifyDataSetChanged()
+    }
+}
