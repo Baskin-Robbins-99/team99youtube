@@ -18,7 +18,7 @@ class VideoAdpter(private val mContext: Context) :
 
     private val VIEW_TYPE_POPULAR = 1
     private val VIEW_TYPE_CATEGORY = 2
-    private val VIEW_TYPE_CHANNEL = 3
+//    private val VIEW_TYPE_CHANNEL = 3
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,10 +34,10 @@ class VideoAdpter(private val mContext: Context) :
                 CategoryHolder(binding)
             }
 
-            3 -> {
-                val binding = VideoItemBinding.inflate(inflater, parent, false)
-                ChannelHolder(binding)
-            }
+//            3 -> {
+//                val binding = VideoItemBinding.inflate(inflater, parent, false)
+//                ChannelHolder(binding)
+//            }
 
             else -> throw IllegalArgumentException("Invalid view type")
         }
