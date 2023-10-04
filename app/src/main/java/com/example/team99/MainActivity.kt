@@ -1,6 +1,7 @@
 package com.example.team99
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -101,27 +102,26 @@ class MainActivity : AppCompatActivity() {
         private const val PREF_NAME = "MyAppPreferences"
 //        private const val KEY_ITEM = "selectedItem" 키는 item의 title로 바꿈
         //리스트 타입으로 넣어야한다. 기존의 값과
-        fun saveSelectedItem(context: Context,  items: List<VideoItem>) {
+        fun saveSelectedItem(context: Context,  items: VideoItem) {
             val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             val gson = GsonBuilder().create()
             val jsonItem = gson.toJson(items)
-            editor.putString("selectedVideoItem", jsonItem)
+            editor.putString(items.title, jsonItem)
             editor.apply()
             //정보를 줄 때와 받을 때 같은 데이터 타입으로 해줘야한다.
         }
 
-        fun getSelectedItem(context: Context, item: VideoItem): ArrayList<VideoItem>{
+        fun getSelectedItem(context: Context, items: ArrayList<VideoItem>): ArrayList<VideoItem>{
             val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             val allEntries: Map<String, *> = sharedPreferences.all
-            val clickitem = ArrayList<VideoItem>()
-            val prefenceString = sharedPreferences.getString(item.title, null)
-            val gson = Gson()
+            val clickItem = ArrayList<VideoItem>()
+            val gson = GsonBuilder().create()
             for ((key, value) in allEntries) {
                 val item = gson.fromJson(value as String, VideoItem::class.java)
-                clickitem.add(item)
+                clickItem.add(item)
             }
-            return clickitem
+            return clickItem
         }
         fun deleteItem(context: Context, title:String) {
             val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

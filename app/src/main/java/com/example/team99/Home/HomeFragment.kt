@@ -2,6 +2,7 @@ package com.example.team99.Home.ViewModel
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -71,14 +72,10 @@ class HomeFragment : Fragment() {
                                 adapter.notifyDataSetChanged()
                             }
                         } else {
-
-
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<YoutubeVideosApi>, t: Throwable) {
-
                 }
             })
     }
