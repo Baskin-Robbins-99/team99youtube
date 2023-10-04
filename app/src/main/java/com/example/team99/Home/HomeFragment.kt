@@ -41,37 +41,76 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = VideoAdpter(mContext)
+        categoryadapter = CategoryAdapter(mContext)
+        channeladapter = ChannelAdapter(mContext)
         mContext = requireContext()
+
+
         binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.popularRecycle.adapter = adapter
 
-        // 카테고리 선택 시 동영상 목록 업데이트
-        val categoryChips = listOf(binding.allChip, binding.gameChip, binding.aniChip)
+        binding.cateoryRecycle.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.cateoryRecycle.adapter = categoryadapter
+        categoryadapter.notifyDataSetChanged()
 
-//        for (chip in categoryChips) {
-//            chip.setOnClickListener {
-//                val selectedCategory = chip.text.toString()
-//                viewModel.selectCategory(selectedCategory)
-//            }
-//        }
+        binding.channelRecycler.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.channelRecycler.adapter = channeladapter
+        channeladapter.notifyDataSetChanged()
 
-        // Kotlin Flow를 사용하여 선택된 카테고리를 관찰하고 동영상 목록 업데이트
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.videoList.collect { videos: List<CategoryVideoItem> ->
-//                adapter.setVideos(videos)
-//                binding.cateoryRecycle.visibility = View.VISIBLE
-//            }
-//        }
-        binding.popularRecycle.adapter = adapter
 
+        binding.musicChip.setOnClickListener {
+            val musicId = categoryItem.filter { item ->
+                item.categoryId == "10"
+            }
+            categoryadapter.setCategoryVideos(musicId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.gameChip.setOnClickListener {
+            val gameId = categoryItem.filter { item ->
+                item.categoryId == "20"
+            }
+            categoryadapter.setCategoryVideos(gameId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.petChip.setOnClickListener {
+            val petId = categoryItem.filter { item ->
+                item.categoryId == "15"
+            }
+            categoryadapter.setCategoryVideos(petId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.sportChip.setOnClickListener {
+            val sportId = categoryItem.filter { item ->
+                item.categoryId == "17"
+            }
+            categoryadapter.setCategoryVideos(sportId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.travelChip.setOnClickListener {
+            val travelId = categoryItem.filter { item ->
+                item.categoryId == "19"
+            }
+            categoryadapter.setCategoryVideos(travelId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.entertainChip.setOnClickListener {
+            val entertainId = categoryItem.filter { item ->
+                item.categoryId == "24"
+            }
+            categoryadapter.setCategoryVideos(entertainId)
+            categoryadapter.notifyDataSetChanged()
+        }
         getVideoData()
     }
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
                     call: Call<YoutubeVideosApi>,
                     response: Response<YoutubeVideosApi>
@@ -82,6 +121,8 @@ class HomeFragment : Fragment() {
                         if (videosApi != null) {
                             val items = videosApi.items
                             if (items != null) {
+                                categoryItem.clear()
+                                popularItem.clear()
                                 for (item in items) {
                                     val snippet = item?.snippet
                                     if (snippet != null) {
@@ -90,6 +131,14 @@ class HomeFragment : Fragment() {
                                         val description = snippet.description ?: ""
                                         val videoItem = VideoItem(thumbnails, title, description)
                                         adapter.videoItems.add(videoItem)
+                                        val categoryId = snippet.categoryId ?: ""
+                                        val chanelId = snippet.channelId ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId)
+                                        categoryItem.add(categoryVideoItem)
+                                        popularItem.add(videoItem)
+                                        videoChannelIds.add(chanelId) // Add the channel ID to the list
+                                        Log.d("HomegetData","nyh ${categoryItem}")
                                     }
                                 }
                                 adapter.notifyDataSetChanged()
@@ -106,8 +155,6 @@ class HomeFragment : Fragment() {
                 }
             })
     }
-
-
 }
 
 

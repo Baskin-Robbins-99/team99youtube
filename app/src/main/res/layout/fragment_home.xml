@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/brown"
     tools:context=".Home.HomeFragment">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/app_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -23,181 +25,171 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/popularRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Popular Video"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Popular Video"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-
-        <TextView
-            android:id="@+id/pop_title"
+            android:id="@+id/popular_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
+            android:layout_marginTop="20dp"
+            android:text="Popular Video"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularRecycle" />
+            app:layout_constraintTop_toBottomOf="@+id/app_title_tv" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popular_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/popular_title_tv" />
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/view1"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
+            android:layout_height="2dp"
             android:layout_marginTop="10dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pop_title" />
+            app:layout_constraintTop_toBottomOf="@+id/popular_recycle" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cateoryRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
         <TextView
-            android:id="@+id/cateory_title"
+            android:id="@+id/categoty_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Category"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cateoryRecycle" />
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+        <HorizontalScrollView
+            android:id="@+id/chip_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoty_title_tv">
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipgroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categoty_title_tv"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/music_chip"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:text="음악"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/game_chip"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:text="게임"
+                    android:textSize="12sp" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/pet_chip"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:text="동물"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sport_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="스포츠"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/travel_chip"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:text="여행"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/entertain_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="엔터테인먼트"
+                    android:textSize="12sp" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/comedy_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="z"
+                    android:textSize="12sp" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cateory_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_scroll" />
 
 
         <View
-            android:id="@+id/view3"
+            android:id="@+id/view2"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cateory_title" />
+            app:layout_constraintTop_toBottomOf="@+id/cateory_recycle" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/all_chip"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:text="전체"
-                android:textSize="12sp"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="329dp" />
-
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/ani_chip"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:text="애니"
-                android:textSize="12sp"
-                tools:layout_editor_absoluteX="80dp"
-                tools:layout_editor_absoluteY="329dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/game_chip"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:text="게임"
-                android:textSize="12sp"
-                tools:layout_editor_absoluteX="80dp"
-                tools:layout_editor_absoluteY="329dp" />
-
-
-        </com.google.android.material.chip.ChipGroup>
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/channel_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Chanel"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Channel"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView3"
+            android:id="@+id/channel_recycler"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
-        <TextView
-            android:id="@+id/chanel_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView3" />
-
+            app:layout_constraintTop_toBottomOf="@+id/channel_title_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </FrameLayout>

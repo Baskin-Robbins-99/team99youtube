@@ -1,6 +1,7 @@
 package com.example.team99.Retrofit
 
 import com.example.team99.YoutubeCategoriesApi
+import com.example.team99.YoutubeChannelApi
 import com.example.team99.YoutubeVideosApi
 import retrofit2.Call
 import retrofit2.http.GET
@@ -12,6 +13,7 @@ interface Retrofit_interface {
         @Query("part")  part: String?,
         @Query("chart") chart: String?,
         @Query("regionCode") regionCode: String?,
+        @Query("maxResults") maxResults: Int?,
         @Query("key") key: String?
     ): Call<YoutubeVideosApi>
     @GET("youtube/v3/videos")
@@ -19,13 +21,13 @@ interface Retrofit_interface {
         @Query("part") part: String?,
         @Query("chart") chart: String?,
         @Query("regionCode") regionCode: String?,
-        @Query("key") key: String?,
-        @Query("videoCategoryId") videoCategoryId: Int
+        @Query("key") key: String?
     ): Call<YoutubeCategoriesApi?>?
-    @GET("youtube/v3/videos")
+    @GET("youtube/v3/channels")
     fun categoryChannel (
         @Query("part") part : String?,
         @Query("id") id : String?,
+        @Query("maxResults") maxResults: Int?,
         @Query("key") key: String?
-    ): Call<YoutubeVideosApi>
+    ): Call<YoutubeChannelApi>
 }

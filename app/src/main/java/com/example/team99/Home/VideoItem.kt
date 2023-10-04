@@ -8,6 +8,10 @@ import java.io.Serializable
 data class VideoItem(
     val thumbnails: String,
     val title: String,
+    val categoryId: String?,
+    val chanelId: String
+ //   val type: Int
+    val title: String,
     //var isLike: Boolean,
     var description: String
 ): Serializable {
