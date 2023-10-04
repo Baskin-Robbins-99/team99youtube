@@ -1,21 +1,16 @@
-package com.example.team99.Home
+package com.example.team99.Home.ViewModel
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.team99.Home.ViewModel.HomeViewModel
-import com.example.team99.MyVideoFragment
-import com.example.team99.VideoDetailActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.DTO.YoutubeVideosApi
+import com.example.team99.Home.VideoAdapter
 import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,38 +19,31 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
-    private lateinit var adapter: VideoAdpter
+    private lateinit var adapter: VideoAdapter
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
 
-    private  lateinit var binding: FragmentHomeBinding
-    lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // 뷰모델이 가지고 있는 값의 변경사항을 관찰할 수 있는 라이브 데이터를 옵저빙한다.
-        homeViewModel.currenValue.observe(viewLifecycleOwner, Observer {
-            binding.homeFrag.text = it.toString()
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mContext = requireContext()
-        adapter = VideoAdpter(mContext)
-        binding.popularRecyclerview.layoutManager =
+        adapter = VideoAdapter(mContext)
+        binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-        binding.popularRecyclerview.adapter = adapter
-        getVideoData()
+        binding.popularRecycle.adapter = adapter
 
+        getVideoData()
     }
 
     private fun getVideoData() {
@@ -67,7 +55,6 @@ class HomeFragment : Fragment() {
                     response: Response<YoutubeVideosApi>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("respone", response.body().toString())
                         val videosApi = response.body()
                         if (videosApi != null) {
                             val items = videosApi.items
@@ -95,7 +82,11 @@ class HomeFragment : Fragment() {
                 }
             })
     }
+
+
 }
+
+
 
 
 
