@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.team99.Home.Items.VideoItem
+import com.example.team99.Home.VideoItem
 import com.example.team99.MainActivity
 import com.example.team99.databinding.MyvdVideoBinding
 
@@ -16,7 +16,7 @@ class MyStorageAdapter(private val context: Context) :
 
     fun addAll(itemList: List<VideoItem>) {
         myvideos.addAll(itemList)
-        notifyDataSetChanged() // 데이터가 변경되었음을 알립니다.
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyStorageHolder {
@@ -31,7 +31,7 @@ class MyStorageAdapter(private val context: Context) :
             .into(holder.videoThumnail)
         holder.title.text = currentItem.title
         holder.item.setOnClickListener{
-            MainActivity.deleteItem(context, currentItem.title)
+            MainActivity.deleteItem(context, currentItem.title.toString())
             myvideos.removeAt(position)
             notifyDataSetChanged()
         }

@@ -8,45 +8,46 @@
     android:background="@color/brown"
     tools:context=".MyVideoFragment.View.MyVideoFragment">
 
-    <TextView
-        android:id="@+id/myvd_txt_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Baskin-Robbins 99"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/myvd_img_main_my"
+
+    <ImageView
+        android:id="@+id/myvd_logo"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="15dp"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/myvd_img_main_my"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:srcCompat="@drawable/img_me"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/myvideo_circle"
         android:clipToOutline="true"
         android:scaleType="centerCrop"
-        android:background="@drawable/myvideo_circle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.4"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp" />
-
+        app:srcCompat="@drawable/img_me" />
 
     <TextView
         android:id="@+id/myvd_txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
         android:text="베스킨라빈스 31"
-        app:layout_constraintTop_toBottomOf="@id/myvd_img_main_my"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/myvd_txt_explain"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myvd_img_main_my" />
 
     <TextView
         android:id="@+id/myvd_txt_explain"
@@ -63,7 +64,7 @@
         android:id="@+id/myvd_view1"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@color/white"
+        android:background="@color/orange"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,9 +75,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
         android:textColor="@color/white"
-        android:text="내 기록"
+        android:text="내 보관함"
         app:layout_constraintTop_toBottomOf="@id/myvd_view1"
         app:layout_constraintStart_toStartOf="parent"
         />

@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.webkit.WebSettings
 import android.webkit.WebView
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.team99.Home.HomeAdapter.VideoAdpter
+import com.example.team99.Home.VideoItem
+import com.example.team99.MainActivity
 import com.example.team99.R
 import com.example.team99.databinding.ActivityVideoDetailBinding
+
 
 
 class VideoDetailActivity : AppCompatActivity() {
@@ -54,14 +56,31 @@ class VideoDetailActivity : AppCompatActivity() {
         }
 
         // 즐겨찾기 이미지 클릭 시
-        findViewById<ImageView>(R.id.iv_detailLike).setOnClickListener {
+        binding.ivDetailLike.setOnClickListener {
             if (!isFavorite) {
+                binding.ivDetailLike.setImageResource(R.drawable.ic_bookmark)
                 isFavorite = true
-                // Favorit에 추가되었다는 토스트 메시지 표시
-                Toast.makeText(this, "Favorit에 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                val title = intent.getStringExtra("title")?: ""
+                val description = intent.getStringExtra("description")
+                val thumbnails = intent.getStringExtra("thumbnails")
+                val videoItem = VideoItem(
+                    title = title ?: "",
+                    description = description ?: "",
+                    categoryId = null,
+                    chanelId = null,
+                    thumbnails = thumbnails ?: ""
+                )
+                MainActivity.saveSelectedItem(mContext, videoItem)
+            Toast.makeText(this, "내 보관함에 등록하였습니다!", Toast.LENGTH_SHORT).show()
             }
+            else{
+                val title = intent.getStringExtra("title") ?: ""
+                MainActivity.deleteItem(mContext, title)
+            binding.ivDetailLike.setImageResource(R.drawable.ic_bookmark_border)
+        }
         }
     }
 
+    }
 
-}
+

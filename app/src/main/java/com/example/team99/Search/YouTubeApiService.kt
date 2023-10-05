@@ -21,5 +21,15 @@ interface YouTubeApiService {
         @Query("key") key: String
     ): Response<VideoDetailResponse>
 
+    @GET("channels")
+    suspend fun getChannelDetails(
+        @Query("part") part: String = "snippet",
+        @Query("id") channelId: String,
+        @Query("key") key: String
+    ): Response<ChannelResponse>
+
+
+
+
 }
 
