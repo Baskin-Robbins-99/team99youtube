@@ -29,6 +29,12 @@ class SearchAdapter : ListAdapter<SearchVideoItem, SearchAdapter.VideoViewHolder
             tvVideoChannelName.text = video.channelName
             tvVideoViewCount.text = infoNumHelper.convertViewCount(video.viewCount)
             tvVideoDate.text = infoNumHelper.convertPublishedDate(video.date)
+
+            // 채널 로고 로딩
+            video.channelLogo?.let { logoUrl ->
+                Picasso.get().load(video.channelLogo).into(ivChannelLogo)
+
+            }
         }
     }
 }
