@@ -50,6 +50,9 @@ dependencies {
     // Fragment KTX (includes viewModels function)
     implementation ("androidx.fragment:fragment-ktx:1.3.6")
 
+    //splash
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.19")
+
 
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")

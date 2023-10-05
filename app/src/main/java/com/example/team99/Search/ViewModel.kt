@@ -30,12 +30,11 @@ class VideoViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = repository.searchVideos(query) ?: listOf()
-                searchResult.value = result
 
-                if (result != null) {
-                    searchResult.value = result
-                } else {
+                if (result.isEmpty()) {
                     errorMessage.value = "No videos found"
+                } else {
+                    searchResult.value = result
                 }
 
             } catch (e: Exception) {

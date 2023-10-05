@@ -15,7 +15,8 @@ data class ApiVideoItem(
         val description: String,
         val thumbnails: Thumbnails,
         val channelTitle: String,
-        val publishedAt: String
+        val publishedAt: String,
+        val channelId: String  // 채널 ID 추가
     )
 
     data class ContentDetails(
