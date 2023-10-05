@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.DTO.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.DTO.YoutubeChannelApi
-import com.example.team99.Detail.VideoDetailActivity
 import com.example.team99.Home.HomeAdapter.CategoryAdapter
 import com.example.team99.Home.HomeAdapter.ChannelAdapter
 import com.example.team99.Home.HomeAdapter.VideoAdpter
 import com.example.team99.Home.Items.ChannelItem
-import com.example.team99.Home.Items.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -225,8 +223,8 @@ class HomeFragment : Fragment() {
                                         val chanelId = snippet.channelId ?: ""
                                         val description = snippet.description?: ""
                                         val videoId = item.id ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         videoChannelIds.add(chanelId)
