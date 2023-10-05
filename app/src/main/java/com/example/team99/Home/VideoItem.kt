@@ -8,6 +8,8 @@ data class VideoItem(
     val thumbnails: String,
     val title: String,
     val categoryId: String?,
+    //   val type: Int
+): Serializable
     val chanelId: String,
     //   val type: Int
     //var isLike: Boolean,
