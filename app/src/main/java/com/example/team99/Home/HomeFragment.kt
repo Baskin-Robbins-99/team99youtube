@@ -24,7 +24,6 @@ class HomeFragment : Fragment() {
     private lateinit var categoryadapter: CategoryAdapter
     private lateinit var channeladapter: ChannelAdapter
     private var videoChannelIds = mutableListOf<String>()
-
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
     private var channelItems = mutableListOf<ChannelItem>()
@@ -69,6 +68,16 @@ class HomeFragment : Fragment() {
             val musicId = categoryItem.filter { item ->
                 item.categoryId == "10"
             }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (musicId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
             categoryadapter.setCategoryVideos(musicId)
             categoryadapter.notifyDataSetChanged()
         }
@@ -76,6 +85,16 @@ class HomeFragment : Fragment() {
             val gameId = categoryItem.filter { item ->
                 item.categoryId == "20"
             }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (gameId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
             categoryadapter.setCategoryVideos(gameId)
             categoryadapter.notifyDataSetChanged()
         }
@@ -83,6 +102,16 @@ class HomeFragment : Fragment() {
             val petId = categoryItem.filter { item ->
                 item.categoryId == "15"
             }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (petId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
             categoryadapter.setCategoryVideos(petId)
             categoryadapter.notifyDataSetChanged()
         }
@@ -90,6 +119,16 @@ class HomeFragment : Fragment() {
             val sportId = categoryItem.filter { item ->
                 item.categoryId == "17"
             }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (sportId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
             categoryadapter.setCategoryVideos(sportId)
             categoryadapter.notifyDataSetChanged()
         }
@@ -97,6 +136,16 @@ class HomeFragment : Fragment() {
             val travelId = categoryItem.filter { item ->
                 item.categoryId == "19"
             }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (travelId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
             categoryadapter.setCategoryVideos(travelId)
             categoryadapter.notifyDataSetChanged()
         }
@@ -104,7 +153,34 @@ class HomeFragment : Fragment() {
             val entertainId = categoryItem.filter { item ->
                 item.categoryId == "24"
             }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (entertainId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
             categoryadapter.setCategoryVideos(entertainId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.comedyChip.setOnClickListener {
+            val comedyId = categoryItem.filter { item ->
+                item.categoryId == "23"
+            }
+            val matchingChannels = mutableListOf<ChannelItem>()
+
+            for (channelItem in channelItems) {
+                if (comedyId.any { it.chanelId == channelItem.channelId }) {
+                    matchingChannels.add(channelItem)
+                }
+            }
+
+            channeladapter.setChannels(matchingChannels)
+            channeladapter.notifyDataSetChanged()
+            categoryadapter.setCategoryVideos(comedyId)
             categoryadapter.notifyDataSetChanged()
         }
         getVideoData()
@@ -113,7 +189,7 @@ class HomeFragment : Fragment() {
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo("snippet", "mostPopular", "KR", 50,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(

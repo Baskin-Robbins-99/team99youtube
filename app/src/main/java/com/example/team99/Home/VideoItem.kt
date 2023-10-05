@@ -11,6 +11,3 @@ data class VideoItem(
     val chanelId: String,
     val description: String
 ): Serializable
-
-
-

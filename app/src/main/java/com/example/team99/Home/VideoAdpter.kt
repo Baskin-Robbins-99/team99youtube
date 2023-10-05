@@ -134,11 +134,6 @@ class VideoAdpter(private val mContext: Context) :
         }
     }
 
-    inner class ChannelHolder(private val binding: VideoItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        var thumbnails: ImageView = binding.thumbnailsIv
-        var title: TextView = binding.titleTv
-    }
 
 
     fun setCategoryVideos(newVideos: List<VideoItem>) {
