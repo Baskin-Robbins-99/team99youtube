@@ -49,7 +49,7 @@ class VideoDetailActivity : AppCompatActivity() {
         Log.d("VideoDetailActivity", "Iframe 코드가 WebView에 로드되었습니다.")
 
         // 이미지 버튼 클릭 시
-        findViewById<ImageButton>(R.id.btn_back).setOnClickListener {
+        findViewById<ImageView>(R.id.btn_back).setOnClickListener {
             finish()
         }
 

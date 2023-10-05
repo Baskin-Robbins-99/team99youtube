@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".VideoDetailActivity"
+            android:name=".Detail.VideoDetailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
