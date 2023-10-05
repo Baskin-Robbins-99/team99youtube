@@ -49,16 +49,18 @@ class VideoAdpter(private val mContext: Context) :
 
         init {
             thumbnails.setOnClickListener {
+
                 val position = adapterPosition.takeIf { it != RecyclerView.NO_POSITION }
                     ?: return@setOnClickListener
                 val clickItem = videoItems[position]
                 if (position != RecyclerView.NO_POSITION) {
-                    MainActivity.saveSelectedItem(mContext, clickItem)
-                    Log.d("itemd", "$clickItem")
+//                    MainActivity.saveSelectedItem(mContext, clickItem)
+//                    Log.d("itemd", "$clickItem")
 
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
                     intent.putExtra("title", clickItem.title)
                     intent.putExtra("description", clickItem.description)
+                    intent.putExtra("thumbnails",clickItem.thumbnails)
                     thumbnails.context.startActivity(intent)
                 }
             }

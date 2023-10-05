@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navigationItemSelect()
+//        navigationItemSelect()
 //        db = FirebaseFirestore.getInstance()
 //        storge = Firebase.storage
 
@@ -48,6 +48,11 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigationItemSelect()
     }
 
     private fun navigationItemSelect(){

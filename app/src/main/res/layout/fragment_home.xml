@@ -13,17 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <ImageView
             android:id="@+id/app_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="구구콘"
-            android:textColor="@color/white"
-            android:textSize="25sp"
+            android:layout_width="230dp"
+            android:layout_height="90dp"
+            android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"/>
+
 
         <TextView
             android:id="@+id/popular_title_tv"
@@ -189,6 +188,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/channel_title_tv" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
