@@ -9,9 +9,8 @@ data class VideoItem(
     val title: String,
     val categoryId: String?,
     val chanelId: String,
-    //   val type: Int
-    //var isLike: Boolean,
     var description: String
+    //var isLike: Boolean,
 ) : Serializable {
     companion object {
         val title: CharSequence?
