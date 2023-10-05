@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.team99.databinding.VideoItemBinding
 
 class ChannelAdapter (private val mContext: Context) : RecyclerView.Adapter<ChannelAdapter.ChanelHolder>() {
-    var chanelItems: MutableList<ChannelItem> = ArrayList()
+    var channelItems: MutableList<ChannelItem> = ArrayList()
 
     inner class ChanelHolder(val binding: VideoItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -25,7 +25,7 @@ class ChannelAdapter (private val mContext: Context) : RecyclerView.Adapter<Chan
         return ChanelHolder(binding)
     }
     override fun onBindViewHolder(holder: ChanelHolder, position: Int) {
-        val channelVideoItems = chanelItems[position]
+        val channelVideoItems = channelItems[position]
         val channelHolder = holder as ChanelHolder
         Glide.with(mContext)
             .load(channelVideoItems.thumbnails)
@@ -34,13 +34,13 @@ class ChannelAdapter (private val mContext: Context) : RecyclerView.Adapter<Chan
     }
 
     override fun getItemCount(): Int {
-        return chanelItems.size
+        return channelItems.size
     }
 
     fun setChannels(newVideos: List<ChannelItem>) {
-        chanelItems.clear()
+        channelItems.clear()
         if (newVideos.isNotEmpty()) {
-            chanelItems.addAll(newVideos)
+            channelItems.addAll(newVideos)
         }
         notifyDataSetChanged()
     }
