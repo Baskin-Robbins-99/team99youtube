@@ -63,13 +63,14 @@ class VideoDetailActivity : AppCompatActivity() {
                 val title = intent.getStringExtra("title")?: ""
                 val description = intent.getStringExtra("description")
                 val thumbnails = intent.getStringExtra("thumbnails")
+                val videoId = intent.getStringExtra("videoId")
                 val videoItem = VideoItem(
                     title = title ?: "",
                     description = description ?: "",
                     categoryId = null,
                     chanelId = null,
                     thumbnails = thumbnails ?: "",
-                    videoid = null
+                    videoId = videoId ?: ""
                 )
                 MainActivity.saveSelectedItem(mContext, videoItem)
             Toast.makeText(this, "내 보관함에 등록하였습니다!", Toast.LENGTH_SHORT).show()

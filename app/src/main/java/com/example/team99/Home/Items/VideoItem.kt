@@ -10,5 +10,5 @@ data class VideoItem(
     val categoryId: String?,
     val chanelId: String?,
     val description: String?,
-    val videoid : String?
+    val videoId : String?
 ): Serializable
