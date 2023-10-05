@@ -1,7 +1,6 @@
-package com.example.team99
+package com.example.team99.Detail
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebSettings
@@ -10,15 +9,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.team99.Home.HomeFragment
-import com.example.team99.Home.VideoAdpter
-import com.example.team99.Home.VideoItem
-import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.Home.HomeAdapter.VideoAdpter
+import com.example.team99.R
 import com.example.team99.databinding.ActivityVideoDetailBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
 
 
 class VideoDetailActivity : AppCompatActivity() {

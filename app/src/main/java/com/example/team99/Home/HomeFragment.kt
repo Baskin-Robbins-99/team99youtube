@@ -9,9 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.team99.YoutubeVideosApi
+import com.example.team99.DTO.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
-import com.example.team99.YoutubeChannelApi
+import com.example.team99.DTO.YoutubeChannelApi
+import com.example.team99.Home.HomeAdapter.CategoryAdapter
+import com.example.team99.Home.HomeAdapter.ChannelAdapter
+import com.example.team99.Home.HomeAdapter.VideoAdpter
+import com.example.team99.Home.Items.ChannelItem
+import com.example.team99.Home.Items.VideoItem
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
