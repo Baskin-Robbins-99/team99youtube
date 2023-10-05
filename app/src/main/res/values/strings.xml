@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">team99</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="thumbnail_description">Description of the thumbnail image</string>
+    <string name="channel_logo">channel_logo</string>
+    <string name="thumbnail">thumbnail</string>
     <style name="CustomChipChoice." parent="@style/Widget.MaterialComponents.Chip.Filter">
+
         <item name="chipBackgroundColor" >@color/chip_bg_state_list</item>
         <item name="android:textColor" >@color/chip_text_state_list</item>
+
 
     </style>
     <string name="api_key">AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc</string>
