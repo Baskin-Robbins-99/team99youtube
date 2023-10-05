@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "884653061458",
+    "project_id": "baskin-robbins-99",
+    "storage_bucket": "baskin-robbins-99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884653061458:android:d9b8c211b59103314a368b",
+        "android_client_info": {
+          "package_name": "com.example.team99"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_PAV8r2wN8lfiwV83dVq3tdeUtaC4SE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
