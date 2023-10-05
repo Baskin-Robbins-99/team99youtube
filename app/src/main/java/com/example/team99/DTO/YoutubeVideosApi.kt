@@ -25,8 +25,8 @@ data class YoutubeVideosApi(
     data class Item(
         @SerializedName("etag")
         val etag: String?,
-        @SerializedName("vidioId")
-        val id: String?,
+        @SerializedName("id")
+        val videoId: String?,
         @SerializedName("kind")
         val kind: String?,
         @SerializedName("snippet")

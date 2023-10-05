@@ -207,7 +207,6 @@ class HomeFragment : Fragment() {
                     response: Response<YoutubeVideosApi>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("respone", response.body().toString())
                         val videosApi = response.body()
                         if (videosApi != null) {
                             val items = videosApi.items
@@ -222,9 +221,11 @@ class HomeFragment : Fragment() {
                                         val categoryId = snippet.categoryId ?: ""
                                         val chanelId = snippet.channelId ?: ""
                                         val description = snippet.description?: ""
-                                        val videoId = item.id ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
+
+                                        val videoId = item.videoId ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
+
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         videoChannelIds.add(chanelId)
