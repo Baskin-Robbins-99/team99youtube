@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,14 +93,14 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/music_chip"
-                    android:layout_width="55dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="음악"
                     android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/game_chip"
-                    android:layout_width="55dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="게임"
                     android:textSize="12sp" />
@@ -107,7 +108,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/pet_chip"
-                    android:layout_width="55dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="동물"
                     android:textSize="12sp" />
@@ -121,7 +122,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/travel_chip"
-                    android:layout_width="55dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="여행"
                     android:textSize="12sp" />
@@ -147,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -183,6 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

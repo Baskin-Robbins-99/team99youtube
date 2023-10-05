@@ -27,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/iv_detailLike"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="right"
                 android:src="@drawable/ic_bookmark_border"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -39,13 +39,12 @@
                 android:id="@+id/btn_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/icon_back"
-                android:layout_marginStart="1dp"
-                android:background="@android:color/transparent"
+                android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                app:tint="@color/white" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

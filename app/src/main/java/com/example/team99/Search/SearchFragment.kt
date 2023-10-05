@@ -57,16 +57,34 @@ class SearchFragment : Fragment() {
         // EditText listener for IME action
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (binding.etSearch.text.toString().trim().isNotEmpty()) {
-                    searchVideoViewModel.searchVideos(binding.etSearch.text.toString().trim())
-                    hideKeyboard(binding.etSearch)
-                } else {
-                    Toast.makeText(context, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show()
-                }
+                performSearch(binding.etSearch.text.toString().trim())
                 true
             } else {
                 false
             }
+        }
+
+        // Keyword TextView listeners
+        binding.fullTxt.setOnClickListener { performSearch("전체") }
+        binding.gameTxt.setOnClickListener { performSearch("게임") }
+        binding.newsTxt.setOnClickListener { performSearch("뉴스") }
+        binding.musicTxt.setOnClickListener { performSearch("음악") }
+        binding.timeTxt.setOnClickListener { performSearch("실시간") }
+        binding.postTxt.setOnClickListener { performSearch("게시물") }
+
+        // Search button listener
+        binding.searchBtn.setOnClickListener {
+            val query = binding.etSearch.text.toString().trim()
+            performSearch(query)
+        }
+    }
+
+    private fun performSearch(query: String) {
+        if (query.isNotEmpty()) {
+            searchVideoViewModel.searchVideos(query)
+            hideKeyboard(binding.etSearch)
+        } else {
+            Toast.makeText(context, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show()
         }
     }
 

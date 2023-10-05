@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.team99.Home.VideoItem
+import com.example.team99.Home.Items.VideoItem
 import com.example.team99.MainActivity
 import com.example.team99.databinding.MyvdVideoBinding
 
