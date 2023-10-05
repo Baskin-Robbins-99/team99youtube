@@ -6,6 +6,4 @@ data class ChannelItem    (
 val thumbnails: String,
 val title: String,
 val channelId: String
-
-
 ): Serializable
