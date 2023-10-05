@@ -1,4 +1,4 @@
-package com.example.team99.Home
+package com.example.team99.Home.Items
 
 
 import java.io.Serializable
@@ -9,5 +9,6 @@ data class VideoItem(
     val title: String,
     val categoryId: String?,
     val chanelId: String,
-    val description: String
+    val description: String,
+    val videoId: String
 ): Serializable

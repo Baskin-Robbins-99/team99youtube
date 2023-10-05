@@ -38,12 +38,11 @@
 
         <!-- 이미지 뷰의 좌우 마진을 설정하여 위치를 조절합니다. -->
         <ImageView
-            android:id="@+id/searchBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/icon_search"
+            android:src="@drawable/ic_search"
             app:tint="@color/white" />
     </LinearLayout>
 
@@ -58,7 +57,6 @@
         android:paddingBottom="12dp">
 
         <TextView
-            android:id="@+id/fullTxt"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/circle_background"
@@ -69,7 +67,6 @@
             android:layout_margin="2dp"/>
 
         <TextView
-            android:id="@+id/gameTxt"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/circle_background"
@@ -80,7 +77,6 @@
             android:layout_margin="2dp"/>
 
         <TextView
-            android:id="@+id/newsTxt"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/circle_background"
@@ -91,7 +87,6 @@
             android:layout_margin="2dp"/>
 
         <TextView
-            android:id="@+id/musicTxt"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/circle_background"
@@ -102,7 +97,6 @@
             android:layout_margin="2dp"/>
 
         <TextView
-            android:id="@+id/timeTxt"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/circle_background"
@@ -113,7 +107,6 @@
             android:layout_margin="2dp"/>
 
         <TextView
-            android:id="@+id/postTxt"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/circle_background"
