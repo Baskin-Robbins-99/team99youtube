@@ -189,7 +189,7 @@ class HomeFragment : Fragment() {
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", 50,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo("snippet", "mostPopular", "KR", 50,"AIzaSyB6LQTuxxO_UqyPtss6vgZEDYWH1NZk0Cs")
             .enqueue(object : Callback<YoutubeVideosApi> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
@@ -238,7 +238,7 @@ class HomeFragment : Fragment() {
     private fun getChannelData() {
         for (channelId in videoChannelIds) {
             RetrofitClient.apiService()
-                .categoryChannel("snippet", channelId, 10, "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+                .categoryChannel("snippet", channelId, 10, "AIzaSyB6LQTuxxO_UqyPtss6vgZEDYWH1NZk0Cs")
                 .enqueue(object : Callback<YoutubeChannelApi> {
                     @SuppressLint("NotifyDataSetChanged")
                     override fun onResponse(
