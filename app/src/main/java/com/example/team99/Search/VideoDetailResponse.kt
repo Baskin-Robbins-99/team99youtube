@@ -15,7 +15,8 @@ data class VideoDetailItem(
 
 data class VideoDetailSnippet(
     @SerializedName("channelTitle") val channelName: String,
-    @SerializedName("publishedAt") val publishedAt: String? = null
+    @SerializedName("publishedAt") val publishedAt: String? = null,
+    @SerializedName("channelId") val channelId: String? = null  // 추가된 부분
 )
 
 data class VideoContentDetails(
