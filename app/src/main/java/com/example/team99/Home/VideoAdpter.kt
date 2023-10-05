@@ -2,12 +2,14 @@ package com.example.team99.Home
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.team99.MainActivity
 import com.example.team99.VideoDetailActivity
 import com.example.team99.databinding.VideoItemBinding
 
@@ -79,9 +81,9 @@ class VideoAdpter(private val mContext: Context) :
 
     override fun getItemViewType(position: Int): Int {
         val videoItem = videoItems[position]
-        return when (videoItem.type) {
-            1 -> VIEW_TYPE_POPULAR
-            2 -> VIEW_TYPE_CATEGORY
+        return when (videoItem) {
+            is VideoItem -> VIEW_TYPE_POPULAR
+
             // 필요한 경우 CategoryItem과 ChannelItem을 구분하여 처리
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -95,9 +97,15 @@ class VideoAdpter(private val mContext: Context) :
 
         init {
             thumbnails.setOnClickListener {
-                val position = adapterPosition
+                val position = adapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
+                val clickItem = videoItems[position]
                 if (position != RecyclerView.NO_POSITION) {
-                    val clickItem = videoItems[position]
+                    MainActivity.saveSelectedItem(mContext,clickItem)
+                    Log.d("itemd", "$clickItem")
+
+
+
+
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
                     intent.putExtra("key", videoItems)
                     thumbnails.context.startActivity(intent)
@@ -130,16 +138,16 @@ class VideoAdpter(private val mContext: Context) :
         var title: TextView = binding.titleTv
     }
 
-    fun setCategoryVideos(newVideos: List<VideoItem>) {
-        val populars = videoItems.filter { it.type == 1 }
-        videoItems.clear()
-        if (newVideos.isNotEmpty()) {
-            videoItems.addAll(newVideos)
-
-        }
-        videoItems.addAll(populars)
-        notifyDataSetChanged()
-    }
+//    fun setCategoryVideos(newVideos: List<VideoItem>) {
+////        val populars = videoItems.filter { it.type == 1 }
+//        videoItems.clear()
+//        if (newVideos.isNotEmpty()) {
+//            videoItems.addAll(newVideos)
+//
+//        }
+//        videoItems.addAll(videoItems)
+//        notifyDataSetChanged()
+//    }
 
     fun setVideos(newVideos: List<VideoItem>){
         videoItems.clear()

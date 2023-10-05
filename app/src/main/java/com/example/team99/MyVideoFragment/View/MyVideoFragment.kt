@@ -1,11 +1,22 @@
 package com.example.team99.MyVideoFragment.View
 
+
 import android.content.Context
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.core.motion.utils.Utils
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import com.example.team99.Home.VideoItem
+import com.example.team99.MainActivity
+import com.example.team99.MainActivity.Companion.getPrefBookmarkItems
+import com.example.team99.MyVideoFragment.Database.MyVideoViewModel
 import com.example.team99.MyVideoFragment.MyStorageAdapter
 import com.example.team99.databinding.FragmentMyVideoBinding
 
@@ -14,6 +25,7 @@ class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding
     lateinit var mystorageadapter: MyStorageAdapter
     private lateinit var myvideos: Context
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         myvideos = requireContext()
@@ -23,13 +35,13 @@ class MyVideoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentMyVideoBinding.inflate(inflater, container, false)
-
+        mystorageadapter = MyStorageAdapter(myvideos)
+        binding.myvdRcStorage.adapter = mystorageadapter
+        val bookmarkedItems = getPrefBookmarkItems(myvideos) // 수정 필요
+        mystorageadapter.addAll(bookmarkedItems)
         return binding.root
     }
-
-
 }
 
 
