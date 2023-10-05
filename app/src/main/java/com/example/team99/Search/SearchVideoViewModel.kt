@@ -63,14 +63,19 @@ class SearchVideoViewModel : ViewModel() {
         val viewCount = videoDetails.statistics.viewCount
         val date = videoDetails.snippet.publishedAt ?: "Unknown"
 
+        // Add this block for channel logo fetching
+        val channelId = videoDetails.snippet.channelId ?: return null
+        val channelLogoResponse = RetrofitInstance.api.getChannelDetails(channelId = channelId, key = "AIzaSyBGb0QETVeG-ncGgn-mBvJW6mzhQV1HYHc")
+        val channelLogo = channelLogoResponse.body()?.items?.firstOrNull()?.snippet?.thumbnails?.defaultThumbnail?.url
+
         return SearchVideoItem(
             thumbnailUrl = thumbnailUrl,
             duration = videoDuration,
             title = videoItem.snippet.title,
             channelName = channelName,
             viewCount = viewCount,
-            date = date
+            date = date,
+            channelLogo = channelLogo
         )
     }
-
 }

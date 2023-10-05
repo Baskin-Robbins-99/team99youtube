@@ -216,19 +216,21 @@ class HomeFragment : Fragment() {
                                 popularItem.clear()
                                 for (item in items) {
                                     val snippet = item?.snippet
-                                    val videoId = item?.id ?: ""
                                     if (snippet != null) {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
                                         val chanelId = snippet.channelId ?: ""
                                         val description = snippet.description?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description,videoId)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description,videoId)
+
+                                        val videoId = item.videoId ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
+
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         videoChannelIds.add(chanelId)
-                                        Log.d("fjkdjf","$videoItem")
+                                        Log.d("HomegetData","nyh ${categoryItem}")
                                     }
                                 }
                                 adapter.setVideos(categoryItem)
@@ -268,7 +270,7 @@ class HomeFragment : Fragment() {
                                         val channelId = item.id ?: ""
                                         val channelItem = ChannelItem(thumbnails, title, channelId)
                                         channelItems.add(channelItem)
-                                        Log.d("HomeChannelgetData", "nyh : ${channelItems}")
+                                        Log.d("HomeChannelgetData", "nyh ${channelItems}")
                                         channeladapter.setChannels(channelItems)
                                     }
                                 }
