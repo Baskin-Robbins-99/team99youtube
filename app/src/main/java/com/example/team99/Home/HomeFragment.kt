@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.team99.CategoryAdapter
 import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.YoutubeChannelApi
@@ -26,7 +24,6 @@ class HomeFragment : Fragment() {
     private lateinit var categoryadapter: CategoryAdapter
     private lateinit var channeladapter: ChannelAdapter
     private var videoChannelIds = mutableListOf<String>()
-
 
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
@@ -50,7 +47,7 @@ class HomeFragment : Fragment() {
         adapter = VideoAdpter(mContext)
         categoryadapter = CategoryAdapter(mContext)
         channeladapter = ChannelAdapter(mContext)
-
+        mContext = requireContext()
 
 
         binding.popularRecycle.layoutManager =
@@ -61,12 +58,11 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.cateoryRecycle.adapter = categoryadapter
         categoryadapter.notifyDataSetChanged()
+
         binding.channelRecycler.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.channelRecycler.adapter = channeladapter
         channeladapter.notifyDataSetChanged()
-
-
 
 
         binding.musicChip.setOnClickListener {
@@ -139,8 +135,8 @@ class HomeFragment : Fragment() {
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
                                         val chanelId = snippet.channelId ?: ""
-                                        val description = snippet.description ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
+                                        val description = snippet.description?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description )
                                         val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
@@ -163,10 +159,6 @@ class HomeFragment : Fragment() {
                 }
             })
     }
-
-
-}
-
     private fun getChannelData() {
         for (channelId in videoChannelIds) {
             RetrofitClient.apiService()
