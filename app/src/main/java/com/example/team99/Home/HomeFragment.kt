@@ -2,6 +2,7 @@ package com.example.team99.Home
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.DTO.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
 import com.example.team99.DTO.YoutubeChannelApi
+import com.example.team99.Detail.VideoDetailActivity
 import com.example.team99.Home.HomeAdapter.CategoryAdapter
 import com.example.team99.Home.HomeAdapter.ChannelAdapter
 import com.example.team99.Home.HomeAdapter.VideoAdpter
@@ -52,6 +54,7 @@ class HomeFragment : Fragment() {
         categoryadapter = CategoryAdapter(mContext)
         channeladapter = ChannelAdapter(mContext)
         mContext = requireContext()
+
 
 
         binding.popularRecycle.layoutManager =
@@ -217,17 +220,17 @@ class HomeFragment : Fragment() {
                                         val categoryId = snippet.categoryId ?: ""
                                         val chanelId = snippet.channelId ?: ""
                                         val description = snippet.description?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description )
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
+                                        val videoId = item.id ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
-                                        videoChannelIds.add(chanelId) // Add the channel ID to the list
+                                        videoChannelIds.add(chanelId)
                                         Log.d("HomegetData","nyh ${categoryItem}")
                                     }
                                 }
                                 adapter.setVideos(categoryItem)
                                 categoryadapter.setCategoryVideos(categoryItem)
-                                // After getting video data, get channel data
                                 getChannelData()
                             }
                         } else {
@@ -255,7 +258,7 @@ class HomeFragment : Fragment() {
                             if (videosApi != null) {
                                 val items = videosApi.items
                                 if (items != null && items.isNotEmpty()) {
-                                    val item = items[0] // Assuming you want to get data for the first item
+                                    val item = items[0]
                                     val snippet = item?.snippet
                                     if (snippet != null) {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
