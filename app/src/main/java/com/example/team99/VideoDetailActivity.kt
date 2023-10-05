@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.team99.Home.HomeFragment
 import com.example.team99.Home.VideoAdpter
 import com.example.team99.Home.VideoItem
@@ -38,23 +39,29 @@ class VideoDetailActivity : AppCompatActivity() {
 
         binding = ActivityVideoDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        webView = findViewById(R.id.web_view)
+    //    webView = findViewById(R.id.web_view)
 
-        val webSettings: WebSettings = webView.settings
-        webSettings.javaScriptEnabled = true
+       // val webSettings: WebSettings = webView.settings
+      //  webSettings.javaScriptEnabled = true
 
-        val videoId = "C3GouGa0noM"
-        val iframeCode = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe>"
+        //val videoId = "C3GouGa0noM"
+       // val iframeCode = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe>"
         val videotitle = intent.getStringExtra("title")
         val videodescription = intent.getStringExtra("description")
+        val thumbnailUrl = intent.getStringExtra("thumbnailUrl")
         binding.tvDetailDesc.text = videodescription
         binding.tvTitle.text = videotitle
+        Log.d("DetailActivity","nyh $thumbnailUrl")
+        Glide.with(this)
+            .load(thumbnailUrl) // 이미지 URL
+            .into(binding.imageView99)
+
         // WebView에 iframe 코드 로드
-        webView.loadData(iframeCode, "text/html", "utf-8")
+     //   webView.loadData(iframeCode, "text/html", "utf-8")
         Log.d("VideoDetailActivity", "Iframe 코드가 WebView에 로드되었습니다.")
 
         // 이미지 버튼 클릭 시
-        findViewById<ImageButton>(R.id.btn_back).setOnClickListener {
+       binding.btnBack.setOnClickListener {
            finish()
         }
 
