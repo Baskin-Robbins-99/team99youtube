@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.team99.MainActivity
 import com.example.team99.Detail.VideoDetailActivity
-import com.example.team99.Home.Items.VideoItem
+import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.VideoItemBinding
 
 class VideoAdpter(private val mContext: Context) :
@@ -54,13 +54,14 @@ class VideoAdpter(private val mContext: Context) :
                     ?: return@setOnClickListener
                 val clickItem = videoItems[position]
                 if (position != RecyclerView.NO_POSITION) {
-                    MainActivity.saveSelectedItem(mContext, clickItem)
-                    Log.d("itemd", "$clickItem")
+//                    MainActivity.saveSelectedItem(mContext, clickItem)
+//                    Log.d("itemd", "$clickItem")
 
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
                     intent.putExtra("title", clickItem.title)
                     intent.putExtra("description", clickItem.description)
-                    intent.putExtra("videoId", clickItem.videoId)
+                    intent.putExtra("thumbnails",clickItem.thumbnails)
+//                    intent.putExtra("videoId", clickItem.)
                     thumbnails.context.startActivity(intent)
                 }
             }

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.team99.MainActivity
 import com.example.team99.Detail.VideoDetailActivity
-import com.example.team99.Home.Items.VideoItem
+import com.example.team99.Home.VideoItem
 import com.example.team99.databinding.VideoItemBinding
 
 class CategoryAdapter (private val mContext: Context) : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
@@ -33,7 +33,7 @@ class CategoryAdapter (private val mContext: Context) : RecyclerView.Adapter<Cat
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
                     intent.putExtra("title", clickItem.title)
                     intent.putExtra("description", clickItem.description)
-                    intent.putExtra("thumbnailUrl", clickItem.thumbnails)
+                    intent.putExtra("thumbnails",clickItem.thumbnails)
                     thumbnails.context.startActivity(intent)
                 }
             }

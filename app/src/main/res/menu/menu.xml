@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item
         android:id="@+id/item_home"
         android:enabled="true"
@@ -9,7 +10,8 @@
         android:id="@+id/item_search"
         android:enabled="true"
         android:icon="@drawable/icon_search"
-        android:title="검색"/>
+        android:title="검색"
+        />
     <item
         android:id="@+id/item_my_video"
         android:enabled="true"
