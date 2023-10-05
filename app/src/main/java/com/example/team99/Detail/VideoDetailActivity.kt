@@ -68,7 +68,8 @@ class VideoDetailActivity : AppCompatActivity() {
                     description = description ?: "",
                     categoryId = null,
                     chanelId = null,
-                    thumbnails = thumbnails ?: ""
+                    thumbnails = thumbnails ?: "",
+                    videoid = null
                 )
                 MainActivity.saveSelectedItem(mContext, videoItem)
             Toast.makeText(this, "내 보관함에 등록하였습니다!", Toast.LENGTH_SHORT).show()
