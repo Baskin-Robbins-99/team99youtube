@@ -63,7 +63,6 @@ class VideoDetailActivity : AppCompatActivity() {
                 isFavorite = true
                 // Favorit에 추가되었다는 토스트 메시지 표시
                 Toast.makeText(this, "Favorit에 추가되었습니다.", Toast.LENGTH_SHORT).show()
-
             }
         }
         getVideoData()
