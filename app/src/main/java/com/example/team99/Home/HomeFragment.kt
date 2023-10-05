@@ -24,7 +24,6 @@ class HomeFragment : Fragment() {
     private lateinit var categoryadapter: CategoryAdapter
     private lateinit var channeladapter: ChannelAdapter
     private var videoChannelIds = mutableListOf<String>()
-
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
     private var channelItems = mutableListOf<ChannelItem>()
@@ -107,13 +106,20 @@ class HomeFragment : Fragment() {
             categoryadapter.setCategoryVideos(entertainId)
             categoryadapter.notifyDataSetChanged()
         }
+        binding.comedyChip.setOnClickListener {
+            val comedyId = categoryItem.filter { item ->
+                item.categoryId == "23"
+            }
+            categoryadapter.setCategoryVideos(comedyId)
+            categoryadapter.notifyDataSetChanged()
+        }
         getVideoData()
         getChannelData()
     }
 
     private fun getVideoData() {
         RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+            .popularVideo("snippet", "mostPopular", "KR", 50,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
             .enqueue(object : Callback<YoutubeVideosApi> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
