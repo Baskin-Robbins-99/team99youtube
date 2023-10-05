@@ -34,6 +34,8 @@ class HomeFragment : Fragment() {
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
     private var channelItems = mutableListOf<ChannelItem>()
+    private var selectedCategory = "20"
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,6 +49,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -194,6 +197,7 @@ class HomeFragment : Fragment() {
         getVideoData()
         getChannelData()
     }
+
 
     private fun getVideoData() {
         RetrofitClient.apiService()

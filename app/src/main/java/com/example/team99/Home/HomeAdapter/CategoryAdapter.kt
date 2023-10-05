@@ -33,6 +33,7 @@ class CategoryAdapter (private val mContext: Context) : RecyclerView.Adapter<Cat
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
                     intent.putExtra("title", clickItem.title)
                     intent.putExtra("description", clickItem.description)
+                    intent.putExtra("thumbnailUrl", clickItem.thumbnails)
                     thumbnails.context.startActivity(intent)
                 }
             }
