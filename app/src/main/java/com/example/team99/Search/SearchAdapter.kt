@@ -1,33 +1,45 @@
 package com.example.team99.Search
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.team99.databinding.SearchVideoBinding
+import com.example.team99.databinding.SearchItemBinding
+import com.squareup.picasso.Picasso
 
-class SearchAdapter (private val search: Context) : RecyclerView.Adapter<SearchAdapter.PopularHolder>() {
+class SearchAdapter : ListAdapter<SearchVideoItem, SearchAdapter.VideoViewHolder>(VideoDiffCallback()) {
 
-    var searchItems: ArrayList<SearchItem> = ArrayList()
-    fun clearItem() {
-        searchItems.clear()
-        notifyDataSetChanged()
+    private val infoNumHelper = infoNum()
+
+    class VideoViewHolder(val binding: SearchItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
+        val binding = SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VideoViewHolder(binding)
     }
 
+    override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
+        val video = getItem(position)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularHolder {
-        val binding = SearchVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PopularHolder(binding)
+        holder.binding.apply {
+            Picasso.get().load(video.thumbnailUrl).into(ivVideoThumbnail)
+            tvVideoDuration.text = infoNumHelper.convertDurationToHHMMSS(video.duration)
+            tvVideoTitle.text = video.title
+            tvVideoChannelName.text = video.channelName
+            tvVideoViewCount.text = infoNumHelper.convertViewCount(video.viewCount)
+            tvVideoDate.text = infoNumHelper.convertPublishedDate(video.date)
+        }
+    }
+}
+
+class VideoDiffCallback : DiffUtil.ItemCallback<SearchVideoItem>() {
+    override fun areItemsTheSame(oldItem: SearchVideoItem, newItem: SearchVideoItem): Boolean {
+        return oldItem.thumbnailUrl == newItem.thumbnailUrl
     }
 
-    override fun onBindViewHolder(holder: PopularHolder, position: Int) {
-        holder.search_titel.text = searchItems[position].search
+    override fun areContentsTheSame(oldItem: SearchVideoItem, newItem: SearchVideoItem): Boolean {
+        // Check the data for all items are the same or not.
+        return oldItem == newItem
     }
-    override fun getItemCount(): Int {
-        return searchItems.size
-    }
-    inner class PopularHolder(val binding: SearchVideoBinding) : RecyclerView.ViewHolder(binding.root){
-        val search_titel =  binding.searchTxt
-    }
-
 }
