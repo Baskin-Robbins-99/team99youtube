@@ -61,6 +61,7 @@ class VideoAdpter(private val mContext: Context) :
                     intent.putExtra("title", clickItem.title)
                     intent.putExtra("description", clickItem.description)
                     intent.putExtra("thumbnails",clickItem.thumbnails)
+                    intent.putExtra("videoId",clickItem.videoId)
 //                    intent.putExtra("videoId", clickItem.)
                     thumbnails.context.startActivity(intent)
                 }

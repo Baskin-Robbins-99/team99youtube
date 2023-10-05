@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
     private var channelItems = mutableListOf<ChannelItem>()
-    private var selectedCategory = "20"
+
 
 
     override fun onAttach(context: Context) {
@@ -221,7 +221,6 @@ class HomeFragment : Fragment() {
                                         val categoryId = snippet.categoryId ?: ""
                                         val chanelId = snippet.channelId ?: ""
                                         val description = snippet.description?: ""
-
                                         val videoId = item.videoId ?: ""
                                         val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
                                         val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description, videoId)
@@ -229,7 +228,7 @@ class HomeFragment : Fragment() {
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         videoChannelIds.add(chanelId)
-                                        Log.d("HomegetData","nyh ${categoryItem}")
+                                        Log.d("HomegetData","nyh ${videoId}")
                                     }
                                 }
                                 adapter.setVideos(categoryItem)
