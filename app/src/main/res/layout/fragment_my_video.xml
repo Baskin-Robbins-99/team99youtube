@@ -50,9 +50,11 @@
 
     <TextView
         android:id="@+id/myvd_txt_explain"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="배스킨 라빈스의 다양한 아이스크림을 고르듯  개인의 취향에 맞는 영상들을 검색,보관하고 현재 가장 인기있는 영상들을 추천해주는 동영상 플랫폼 앱 입니다. "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,70 +76,22 @@
         android:textSize="20sp"
         android:layout_marginStart="15dp"
         android:textColor="@color/white"
-        android:text="내보관함"
+        android:text="내 기록"
         app:layout_constraintTop_toBottomOf="@id/myvd_view1"
         app:layout_constraintStart_toStartOf="parent"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myvd_rc_storage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myvd_txt_storage"
-        tools:listitem="@layout/myvd_video" />
-
-    <View
-        android:id="@+id/myvd_view2"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/myvd_txt_myrecord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myvd_rc_storage" />
-
-    <ImageView
-        android:id="@+id/myvd_img_my"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/myvideo_circle"
-        android:clipToOutline="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toStartOf="@id/myvd_txt_myrecord"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myvd_view2"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/img_me" />
-
-    <TextView
-        android:id="@+id/myvd_txt_myrecord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:text="내 기록"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myvd_view2"
-        android:layout_marginEnd="300dp"
-        android:layout_marginTop="10dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myvd_rc_myrecord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myvd_txt_myrecord"
+        app:layout_constraintTop_toBottomOf="@id/myvd_txt_storage"
         tools:listitem="@layout/myvd_video" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

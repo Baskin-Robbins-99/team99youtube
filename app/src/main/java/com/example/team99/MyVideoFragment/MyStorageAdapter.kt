@@ -2,10 +2,7 @@ package com.example.team99.MyVideoFragment
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.team99.Home.VideoItem
@@ -33,6 +30,12 @@ class MyStorageAdapter(private val context: Context) :
             .load(currentItem.thumbnails)
             .into(holder.videoThumnail)
         holder.title.text = currentItem.title
+        holder.item.setOnClickListener{
+            MainActivity.deleteItem(context, currentItem.title)
+            myvideos.removeAt(position)
+            notifyDataSetChanged()
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -43,6 +46,8 @@ class MyStorageAdapter(private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         val videoThumnail = binding.myvdVideoThumbnail
         val title = binding.myvdVideoTitle
+        val item = binding.myvdVideo
+
     }
 }
 
