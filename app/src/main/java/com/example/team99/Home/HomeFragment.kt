@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.team99.YoutubeVideosApi
 import com.example.team99.Retrofit.RetrofitClient
+import com.example.team99.YoutubeChannelApi
 import com.example.team99.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,8 +21,13 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mContext: Context
     private lateinit var adapter: VideoAdpter
+    private lateinit var categoryadapter: CategoryAdapter
+    private lateinit var channeladapter: ChannelAdapter
+    private var videoChannelIds = mutableListOf<String>()
+
     private var popularItem = mutableListOf<VideoItem>()
     private var categoryItem = mutableListOf<VideoItem>()
+    private var channelItems = mutableListOf<ChannelItem>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,36 +45,70 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = VideoAdpter(mContext)
+        categoryadapter = CategoryAdapter(mContext)
+        channeladapter = ChannelAdapter(mContext)
         mContext = requireContext()
+
+
         binding.popularRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         binding.popularRecycle.adapter = adapter
 
         binding.cateoryRecycle.layoutManager =
             LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
-        binding.cateoryRecycle.adapter = adapter
+        binding.cateoryRecycle.adapter = categoryadapter
+        categoryadapter.notifyDataSetChanged()
 
-        // 카테고리 선택 시 동영상 목록 업데이트
+        binding.channelRecycler.layoutManager =
+            LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+        binding.channelRecycler.adapter = channeladapter
+        channeladapter.notifyDataSetChanged()
 
-        binding.aniChip.setOnClickListener {
-            val animalId = categoryItem.filter { item ->
 
-                item.type == 2 &&
-                item.categoryId == "15"
-            }
-
-            Log.d("aniChip","nyh ${animalId}")
-            adapter.setCategoryVideos(animalId)
-        }
         binding.musicChip.setOnClickListener {
             val musicId = categoryItem.filter { item ->
-                item.type == 2 &&
+                item.categoryId == "10"
+            }
+            categoryadapter.setCategoryVideos(musicId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.gameChip.setOnClickListener {
+            val gameId = categoryItem.filter { item ->
                 item.categoryId == "20"
             }
-            adapter.setCategoryVideos(musicId)
+            categoryadapter.setCategoryVideos(gameId)
+            categoryadapter.notifyDataSetChanged()
         }
-
+        binding.petChip.setOnClickListener {
+            val petId = categoryItem.filter { item ->
+                item.categoryId == "15"
+            }
+            categoryadapter.setCategoryVideos(petId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.sportChip.setOnClickListener {
+            val sportId = categoryItem.filter { item ->
+                item.categoryId == "17"
+            }
+            categoryadapter.setCategoryVideos(sportId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.travelChip.setOnClickListener {
+            val travelId = categoryItem.filter { item ->
+                item.categoryId == "19"
+            }
+            categoryadapter.setCategoryVideos(travelId)
+            categoryadapter.notifyDataSetChanged()
+        }
+        binding.entertainChip.setOnClickListener {
+            val entertainId = categoryItem.filter { item ->
+                item.categoryId == "24"
+            }
+            categoryadapter.setCategoryVideos(entertainId)
+            categoryadapter.notifyDataSetChanged()
+        }
         getVideoData()
+        getChannelData()
     }
 
     private fun getVideoData() {
@@ -94,14 +134,20 @@ class HomeFragment : Fragment() {
                                         val thumbnails = snippet.thumbnails?.default?.url ?: ""
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, 1)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, 2)
+                                        val chanelId = snippet.channelId ?: ""
+                                        val description = snippet.description?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description )
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
+                                        videoChannelIds.add(chanelId) // Add the channel ID to the list
                                         Log.d("HomegetData","nyh ${categoryItem}")
                                     }
                                 }
                                 adapter.setVideos(categoryItem)
+                                categoryadapter.setCategoryVideos(categoryItem)
+                                // After getting video data, get channel data
+                                getChannelData()
                             }
                         } else {
                         }
@@ -113,8 +159,43 @@ class HomeFragment : Fragment() {
                 }
             })
     }
+    private fun getChannelData() {
+        for (channelId in videoChannelIds) {
+            RetrofitClient.apiService()
+                .categoryChannel("snippet", channelId, 10, "AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
+                .enqueue(object : Callback<YoutubeChannelApi> {
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onResponse(
+                        call: Call<YoutubeChannelApi>,
+                        response: Response<YoutubeChannelApi>
+                    ) {
+                        if (response.isSuccessful) {
+                            val videosApi = response.body()
+                            if (videosApi != null) {
+                                val items = videosApi.items
+                                if (items != null && items.isNotEmpty()) {
+                                    val item = items[0] // Assuming you want to get data for the first item
+                                    val snippet = item?.snippet
+                                    if (snippet != null) {
+                                        val thumbnails = snippet.thumbnails?.default?.url ?: ""
+                                        val title = snippet.title ?: ""
+                                        val channelId = item.id ?: ""
+                                        val channelItem = ChannelItem(thumbnails, title, channelId)
+                                        channelItems.add(channelItem)
+                                        Log.d("HomeChannelgetData", "nyh ${channelItems}")
+                                        channeladapter.setChannels(channelItems)
+                                    }
+                                }
+                            } else {
+                                Log.d("HomeChannelgetData", "Failed to get channel data")
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<YoutubeChannelApi>, t: Throwable) {
+                        Log.d("HomeChannelgetData", "Error: ${t.message}")
+                    }
+                })
+        }
+    }
 }
-
-
-
-
