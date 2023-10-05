@@ -207,6 +207,7 @@ class HomeFragment : Fragment() {
                     response: Response<YoutubeVideosApi>
                 ) {
                     if (response.isSuccessful) {
+                        Log.d("respone", response.body().toString())
                         val videosApi = response.body()
                         if (videosApi != null) {
                             val items = videosApi.items
