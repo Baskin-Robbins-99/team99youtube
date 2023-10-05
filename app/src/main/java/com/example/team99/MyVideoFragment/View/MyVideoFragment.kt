@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.team99.MainActivity.Companion.getPrefBookmarkItems
 import com.example.team99.MyVideoFragment.MyStorageAdapter
 import com.example.team99.databinding.FragmentMyVideoBinding
@@ -28,8 +29,13 @@ class MyVideoFragment : Fragment() {
         binding = FragmentMyVideoBinding.inflate(inflater, container, false)
         mystorageadapter = MyStorageAdapter(myvideos)
         binding.myvdRcStorage.adapter = mystorageadapter
+        val layoutManager = GridLayoutManager(myvideos, 2)
+        binding.myvdRcStorage.layoutManager = layoutManager
+
         val bookmarkedItems = getPrefBookmarkItems(myvideos) // 수정 필요
         mystorageadapter.addAll(bookmarkedItems)
+
+
         return binding.root
     }
 }
