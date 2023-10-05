@@ -16,7 +16,6 @@ class MyVideoFragment : Fragment() {
     private lateinit var binding: FragmentMyVideoBinding
     lateinit var mystorageadapter: MyStorageAdapter
     private lateinit var myvideos: Context
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         myvideos = requireContext()

@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/brown"
     tools:context=".Home.HomeFragment">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -90,38 +92,10 @@
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/all_chip"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:text="전체"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.chip.Chip
                     android:id="@+id/music_chip"
                     android:layout_width="55dp"
                     android:layout_height="40dp"
                     android:text="음악"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/movie_chip"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:text="영화"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/animal_chip"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:text="동물"
-                    android:textSize="12sp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/ani_chip"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:text="애니"
                     android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
@@ -130,6 +104,15 @@
                     android:layout_height="40dp"
                     android:text="게임"
                     android:textSize="12sp" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/pet_chip"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:text="동물"
+                    android:textSize="12sp" />
+
                 <com.google.android.material.chip.Chip
                     android:id="@+id/sport_chip"
                     android:layout_width="wrap_content"
@@ -138,23 +121,23 @@
                     android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/news_chip"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:text="뉴스"
-                    android:textSize="12sp" />
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/trevel_chip"
+                    android:id="@+id/travel_chip"
                     android:layout_width="55dp"
                     android:layout_height="40dp"
                     android:text="여행"
                     android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/short_chip"
-                    android:layout_width="55dp"
+                    android:id="@+id/entertain_chip"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="쇼츠"
+                    android:text="엔터테인먼트"
+                    android:textSize="12sp" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/comedy_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="z"
                     android:textSize="12sp" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -208,4 +191,5 @@
             app:layout_constraintTop_toBottomOf="@+id/channel_title_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </FrameLayout>

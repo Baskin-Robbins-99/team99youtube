@@ -78,6 +78,9 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
     //Okhttp
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation ("androidx.lifecycle:lifecycle-livedata:2.6.2")
+    //Exoplayer
+    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-core:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-dash:2.19.1")
+    implementation ("com.google.android.exoplayer:exoplayer-ui:2.19.1")
 }
