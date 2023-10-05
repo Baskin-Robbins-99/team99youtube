@@ -1,5 +1,3 @@
-// YouTubeApiService.kt
-
 package com.example.team99.Search
 
 import retrofit2.Response
@@ -14,6 +12,14 @@ interface YouTubeApiService {
         @Query("key") key: String,
         @Query("maxResults") maxResults: Int = 25,
         @Query("type") type: String = "video"
-    ): Response<VideoResponse>
+    ): Response<SearchResponse>
+
+    @GET("videos")
+    suspend fun getVideoDetails(
+        @Query("part") part: String = "snippet,contentDetails,statistics",
+        @Query("id") videoId: String,
+        @Query("key") key: String
+    ): Response<VideoDetailResponse>
+
 }
 

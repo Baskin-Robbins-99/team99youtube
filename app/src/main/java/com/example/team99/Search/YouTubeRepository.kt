@@ -1,5 +1,3 @@
-// YouTubeRepository.kt
-
 package com.example.team99.Search
 
 class YouTubeRepository {
@@ -13,10 +11,10 @@ class YouTubeRepository {
             )
             when {
                 response.isSuccessful -> {
-                    response.body()?.items?.map { searchVideoItem ->
-                        mapApiToUi(searchVideoItem)
+                    response.body()?.items?.mapNotNull { videoItem ->
+                        val videoDetail = getVideoDetails(videoItem.id.videoId)
+                        mapApiToUi(videoItem, videoDetail)
                     }
-
                 }
                 else -> {
                     // Log or report the error message
@@ -29,18 +27,22 @@ class YouTubeRepository {
         }
     }
 
-    private fun mapApiToUi(searchVideoItem: SearchVideoItem): SearchVideoItem {
-        val thumbnailUrl = searchVideoItem.thumbnailUrl
+    private suspend fun getVideoDetails(videoId: String): VideoDetailItem? {
+        val response = RetrofitInstance.api.getVideoDetails(videoId = videoId, key = "AIzaSyBGb0QETVeG-ncGgn-mBvJW6mzhQV1HYHc")
+        return response.body()?.items?.firstOrNull()
+    }
 
-        val videoDuration = "영상 길이"
-        val channelName = "채널 이름" //
-        val viewCount = "조회수" //
-        val date = "날짜" //
+    private fun mapApiToUi(videoItem: VideoItem, videoDetail: VideoDetailItem?): SearchVideoItem {
+        val thumbnailUrl = videoItem.snippet.thumbnails.defaultThumbnail.url
+        val videoDuration = videoDetail?.contentDetails?.duration ?: "Unknown"
+        val channelName = videoDetail?.snippet?.channelName ?: "Unknown"
+        val viewCount = videoDetail?.statistics?.viewCount ?: "Unknown"
+        val date = videoDetail?.snippet?.publishedAt ?: "Unknown"
 
         return SearchVideoItem(
             thumbnailUrl = thumbnailUrl,
             duration = videoDuration,
-            title = searchVideoItem.title,
+            title = videoItem.snippet.title,
             channelName = channelName,
             viewCount = viewCount,
             date = date

@@ -1,16 +1,29 @@
 package com.example.team99.Search
 
 data class ApiVideoItem(
-    val snippet: Snippet
+    val id: VideoId,
+    val snippet: Snippet,
+    val contentDetails: ContentDetails? = null,
+    val statistics: Statistics? = null
 ) {
+    data class VideoId(
+        val videoId: String
+    )
+
     data class Snippet(
         val title: String,
         val description: String,
         val thumbnails: Thumbnails,
-        val duration: String, // 예를 들어, 영상 길이 정보 추가
-        val channelName: String, // 예를 들어, 채널 이름 정보 추가
-        val viewCount: String, // 예를 들어, 조회수 정보 추가
-        val date: String // 예를 들어, 날짜 정보 추가
+        val channelTitle: String,
+        val publishedAt: String
+    )
+
+    data class ContentDetails(
+        val duration: String
+    )
+
+    data class Statistics(
+        val viewCount: String
     )
 
     data class Thumbnails(
@@ -21,4 +34,3 @@ data class ApiVideoItem(
         val url: String
     )
 }
-

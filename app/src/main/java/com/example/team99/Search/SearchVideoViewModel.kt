@@ -1,5 +1,3 @@
-// VideoViewModel.kt
-
 package com.example.team99.Search
 
 import androidx.lifecycle.MutableLiveData
@@ -13,15 +11,12 @@ class SearchVideoViewModel : ViewModel() {
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val errorMessage: MutableLiveData<String> = MutableLiveData()
 
-
     fun searchVideos(query: String) {
-        // Check if the query is not blank
-        if(query.isBlank()) {
+        if (query.isBlank()) {
             errorMessage.value = "Query must not be blank"
             return
         }
 
-        // Indicate that loading has started
         isLoading.value = true
 
         viewModelScope.launch {
@@ -29,23 +24,53 @@ class SearchVideoViewModel : ViewModel() {
                 val response = RetrofitInstance.api.searchVideos(
                     part = "snippet",
                     query = query,
-                    key = "AIzaSyCvE-aHt4WSh1CqDE1aIzzLRLByxBgR9GI"
+                    key = "AIzaSyBGb0QETVeG-ncGgn-mBvJW6mzhQV1HYHc"
                 )
                 handleResponse(response)
             } catch (e: Exception) {
                 errorMessage.value = "An error occurred: ${e.localizedMessage}"
             } finally {
-                // Indicate that loading has finished, whether successful or not
                 isLoading.value = false
             }
         }
     }
 
-    private fun handleResponse(response: Response<VideoResponse>) {
-        if(response.isSuccessful) {
-            searchResult.value = response.body()?.items
+    private fun handleResponse(response: Response<SearchResponse>) {
+        if (response.isSuccessful) {
+            viewModelScope.launch {
+                val mappedList = response.body()?.items?.mapNotNull { videoItem ->
+                    mapApiToUi(videoItem)
+                }
+                searchResult.value = mappedList
+            }
         } else {
             errorMessage.value = "Failed to load data: ${response.message()}"
         }
     }
+
+    private suspend fun mapApiToUi(videoItem: VideoItem): SearchVideoItem? {
+        val thumbnailUrl = videoItem.snippet.thumbnails.defaultThumbnail.url
+
+        val videoDetailResponse = RetrofitInstance.api.getVideoDetails(
+            videoId = videoItem.id.videoId,
+            key = "AIzaSyBGb0QETVeG-ncGgn-mBvJW6mzhQV1HYHc"
+        )
+
+        val videoDetails = videoDetailResponse.body()?.items?.firstOrNull() ?: return null
+
+        val videoDuration = videoDetails.contentDetails.duration
+        val channelName = videoDetails.snippet.channelName
+        val viewCount = videoDetails.statistics.viewCount
+        val date = videoDetails.snippet.publishedAt ?: "Unknown"
+
+        return SearchVideoItem(
+            thumbnailUrl = thumbnailUrl,
+            duration = videoDuration,
+            title = videoItem.snippet.title,
+            channelName = channelName,
+            viewCount = viewCount,
+            date = date
+        )
+    }
+
 }

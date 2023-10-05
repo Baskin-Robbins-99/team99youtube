@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.team99.databinding.SearchItemBinding
-import com.squareup.picasso.Picasso // Picasso 라이브러리 추가
+import com.squareup.picasso.Picasso
 
 class SearchAdapter : ListAdapter<SearchVideoItem, SearchAdapter.VideoViewHolder>(VideoDiffCallback()) {
+
+    private val infoNumHelper = infoNum()
 
     class VideoViewHolder(val binding: SearchItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,20 +23,18 @@ class SearchAdapter : ListAdapter<SearchVideoItem, SearchAdapter.VideoViewHolder
         val video = getItem(position)
 
         holder.binding.apply {
-            // ivVideoThumbnail에 이미지 로딩 (Picasso 사용)
             Picasso.get().load(video.thumbnailUrl).into(ivVideoThumbnail)
-            tvVideoDuration.text = video.duration
+            tvVideoDuration.text = infoNumHelper.convertDurationToHHMMSS(video.duration)
             tvVideoTitle.text = video.title
             tvVideoChannelName.text = video.channelName
-            tvVideoViewCount.text = video.viewCount
-            tvVideoDate.text = video.date
+            tvVideoViewCount.text = infoNumHelper.convertViewCount(video.viewCount)
+            tvVideoDate.text = infoNumHelper.convertPublishedDate(video.date)
         }
     }
 }
 
 class VideoDiffCallback : DiffUtil.ItemCallback<SearchVideoItem>() {
     override fun areItemsTheSame(oldItem: SearchVideoItem, newItem: SearchVideoItem): Boolean {
-        // 썸네일 URL을 비교하여 같으면 같은 아이템으로 간주
         return oldItem.thumbnailUrl == newItem.thumbnailUrl
     }
 

@@ -10,6 +10,8 @@ import retrofit2.Response
 
 class VideoViewModel : ViewModel() {
 
+    private val repository = YouTubeRepository()  // Repository 인스턴스 생성
+
     val searchResult = MutableLiveData<List<SearchVideoItem>>()
     val errorMessage = MutableLiveData<String>()
     val isLoading = MutableLiveData<Boolean>()
@@ -24,18 +26,21 @@ class VideoViewModel : ViewModel() {
         // Indicate that loading has started
         isLoading.value = true
 
+        // Start the network request using Coroutine
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.api.searchVideos(
-                    part = "snippet",
-                    query = query,
-                    key = "AIzaSyCvE-aHt4WSh1CqDE1aIzzLRLByxBgR9GI"
-                )
-                handleResponse(response)
+                val result = repository.searchVideos(query) ?: listOf()
+                searchResult.value = result
+
+                if (result != null) {
+                    searchResult.value = result
+                } else {
+                    errorMessage.value = "No videos found"
+                }
+
             } catch (e: Exception) {
-                errorMessage.value = "An error occurred: ${e.localizedMessage}"
+                errorMessage.value = e.localizedMessage ?: "Unknown error"
             } finally {
-                // Indicate that loading has finished, whether successful or not
                 isLoading.value = false
             }
         }
@@ -48,5 +53,4 @@ class VideoViewModel : ViewModel() {
             errorMessage.value = "Failed to load data: ${response.message()}"
         }
     }
-
 }

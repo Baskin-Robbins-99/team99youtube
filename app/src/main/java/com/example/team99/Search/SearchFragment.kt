@@ -1,11 +1,12 @@
 package com.example.team99.Search
 
+import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -50,26 +51,28 @@ class SearchFragment : Fragment() {
 
         // Ensure isLoading LiveData is observed to show/hide a ProgressBar (if implemented)
         searchVideoViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-            binding.progressBar.visibility = if(isLoading) View.VISIBLE else View.GONE
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
 
-        // EditText listener
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                s?.let {
-                    // Optional: Add delay or debounce here to prevent API being hit on every character typed
-                    searchVideoViewModel.searchVideos(it.toString())
+        // EditText listener for IME action
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                if (binding.etSearch.text.toString().trim().isNotEmpty()) {
+                    searchVideoViewModel.searchVideos(binding.etSearch.text.toString().trim())
+                    hideKeyboard(binding.etSearch)
+                } else {
+                    Toast.makeText(context, "검색어를 입력하세요.", Toast.LENGTH_SHORT).show()
                 }
+                true
+            } else {
+                false
             }
+        }
+    }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // No action needed here for this example
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // No action needed here for this example
-            }
-        })
+    private fun hideKeyboard(view: View) {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     override fun onDestroyView() {
