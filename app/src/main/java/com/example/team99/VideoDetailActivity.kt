@@ -45,16 +45,17 @@ class VideoDetailActivity : AppCompatActivity() {
 
         val videoId = "C3GouGa0noM"
         val iframeCode = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/$videoId\" frameborder=\"0\" allowfullscreen></iframe>"
-
+        val videotitle = intent.getStringExtra("title")
+        val videodescription = intent.getStringExtra("description")
+        binding.tvDetailDesc.text = videodescription
+        binding.tvTitle.text = videotitle
         // WebView에 iframe 코드 로드
         webView.loadData(iframeCode, "text/html", "utf-8")
         Log.d("VideoDetailActivity", "Iframe 코드가 WebView에 로드되었습니다.")
 
         // 이미지 버튼 클릭 시
         findViewById<ImageButton>(R.id.btn_back).setOnClickListener {
-            // 홈 프래그먼트로 이동
-            val intent = Intent(this, HomeFragment::class.java)
-            startActivity(intent)
+           finish()
         }
 
         // 즐겨찾기 이미지 클릭 시
@@ -65,52 +66,8 @@ class VideoDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "Favorit에 추가되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
-        getVideoData()
+
     }
 
-    private fun getVideoData() {
-        RetrofitClient.apiService()
-            .popularVideo("snippet", "mostPopular", "KR", 25,"AIzaSyBx5x3nhrglEpE6nZqj37ywin9WJW9WhDc")
-            .enqueue(object : Callback<YoutubeVideosApi> {
-                override fun onResponse(
-                    call: Call<YoutubeVideosApi>,
-                    response: Response<YoutubeVideosApi>
-                ) {
-                    if (response.isSuccessful) {
-                        val videosApi = response.body()
-                        if (videosApi != null) {
-                            val items = videosApi.items
-                            if (items != null) {
-                                for (item in items) {
-                                    val snippet = item?.snippet
-                                    if (snippet != null) {
-                                        val thumbnails = snippet.thumbnails?.default?.url ?: ""
-                                        val title = snippet.title ?: ""
-                                        val categoryId = snippet.categoryId ?: ""
-                                        val chanelId = snippet.channelId ?: ""
-                                        val description = snippet.description ?: ""// Description 추가
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId ,description)
-                                        adapter.videoItems.add(videoItem)
-                                    }
-                                }
-                                adapter.notifyDataSetChanged()
-                                binding.tvDetailDesc.text = VideoItem.description
-                                binding.tvTitle.text = VideoItem.title
-                            }
-                        }
-
-                    }else {
-                        // 실패 처리
-                        Log.d("API", "Error: ${response.code()}")
-                    }
-
-                }
-
-                override fun onFailure(call: Call<YoutubeVideosApi>, t: Throwable) {
-                    Log.d("API", "Error: ${t.message}")
-                // 네트워크 오류 등으로 실패한 경우의 처리
-                }
-            })
-    }
 
 }

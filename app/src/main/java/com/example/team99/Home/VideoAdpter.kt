@@ -103,11 +103,9 @@ class VideoAdpter(private val mContext: Context) :
                     MainActivity.saveSelectedItem(mContext,clickItem)
                     Log.d("itemd", "$clickItem")
 
-
-
-
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
-                    intent.putExtra("key", videoItems)
+                    intent.putExtra("title", clickItem.title)
+                    intent.putExtra("description", clickItem.description)
                     thumbnails.context.startActivity(intent)
                 }
             }
@@ -121,11 +119,15 @@ class VideoAdpter(private val mContext: Context) :
 
         init {
             thumbnails.setOnClickListener {
-                val position = adapterPosition
+                val position = adapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
+                val clickCategory = videoItems[position]
                 if (position != RecyclerView.NO_POSITION) {
-                    videoItems[position]
+                    MainActivity.saveSelectedItem(mContext,clickCategory)
+                    Log.d("cidlfkf", "$clickCategory")
+
                     val intent = Intent(thumbnails.context, VideoDetailActivity::class.java)
-                    intent.putExtra("key", videoItems.toTypedArray())
+                    intent.putExtra("title", clickCategory.title)
+                    intent.putExtra("description", clickCategory.description)
                     thumbnails.context.startActivity(intent)
                 }
             }
