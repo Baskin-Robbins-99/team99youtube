@@ -141,8 +141,9 @@ class HomeFragment : Fragment() {
                                         val title = snippet.title ?: ""
                                         val categoryId = snippet.categoryId ?: ""
                                         val chanelId = snippet.channelId ?: ""
-                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId)
-                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId)
+                                        val description = snippet.description ?: ""
+                                        val videoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
+                                        val categoryVideoItem = VideoItem(thumbnails, title, categoryId, chanelId, description)
                                         categoryItem.add(categoryVideoItem)
                                         popularItem.add(videoItem)
                                         videoChannelIds.add(chanelId) // Add the channel ID to the list
